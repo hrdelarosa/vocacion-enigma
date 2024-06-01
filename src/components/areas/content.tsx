@@ -24,7 +24,7 @@ export default function ContentAreas() {
 
   useEffect(() => {
     // try {
-      fetch("http://localhost:3000/api/areas")
+      fetch("/api/areas")
         .then((response) => response.json())
         .then((data) => {
           if (Array.isArray(data.data)) setAresa(data.data);
