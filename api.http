@@ -1,0 +1,71 @@
+### Recuperar todas las Preparatorias
+GET http://localhost:3000/api/preparatorias
+
+
+
+### Crear un Usuario
+POST http://localhost:3000/api/usuarios
+Content-Type: application/json
+
+{
+    "full_name": "Charles Leclerc",
+    "email": "charleslec@example.com",
+    "contraseña": "123456",
+    "matricula": "3456789021",
+    "preparatoria_id": 2
+}
+
+### Obtner un Usuario por correo electronico
+GET http://localhost:3000/api/usuarios/20443301@uagro.mx
+
+
+
+### Recuperar todas las Universidades
+GET http://localhost:3000/api/universidades
+
+### Recuperar todas las Universidades por un Area
+GET http://localhost:3000/api/universidades/Área Administrativa
+
+
+
+### Recuperar todas las Areas de Estudio
+GET http://localhost:3000/api/areas
+
+### Recuperar un Areas de Estudio en especifico
+GET http://localhost:3000/api/areas/Área de Ciencias Experimentales
+
+
+
+###Recuperar las Respuestas de un Usuario por correo electronico
+GET http://localhost:3000/api/prueba/usuario/1
+
+### Guardar las Respuestas del Usuario
+POST http://localhost:3000/api/prueba
+Content-Type: application/json
+
+{
+    "prueba": [1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0]
+}
+
+###Actualizar el id del cuestionario del usuario
+GET http://localhost:3000/api/prueba/20443301@uagro.mx
+###Actualizar el id del cuestionario del usuario
+POST http://localhost:3000/api/prueba/usuario
+Content-Type: application/json
+
+{
+    "email": "20443301@uagro.mx"
+}
+
+    
+
+### Guardar el resultado del usuario
+POST http://localhost:3000/api/resultado
+Content-Type: application/json
+
+{
+    "area": "Ingeniería y Tecnología"
+}
+
+### Recuperar el del el resulatdo por el email
+GET http://localhost:3000/api/resultado/20443301@uagro.mx
