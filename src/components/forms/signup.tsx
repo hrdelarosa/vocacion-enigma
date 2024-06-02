@@ -27,7 +27,7 @@ const comfirmEmail = () => toast.success("Te hemos enviado un correo de confirma
   duration: 7000,
 })
 
-export default function FormSignup() {
+export default function FormSignup({ prep }: { prep: Preparatoria[]}) {
   const { register, handleSubmit, watch, setValue ,formState: { errors } } = useForm<Inputs>({
     resolver: zodResolver(userSignScheme),
     defaultValues: {
@@ -49,18 +49,26 @@ export default function FormSignup() {
     comfirmEmail()
   }
 
-  useEffect(() => {
-    fetch('http://localhost:3000/api/preparatorias')
-    .then((response) => response.json())
-    .then((data) => {
-      if (Array.isArray(data.data)) {
-        setPreparatorias(data.data)
-        if (data.data.length > 0) setValue('preparatoria', data.data[0].id.toString())
-      }
-      else throw new Error('Invalid data format')
-    })
-    .catch((error) => console.error('There was a problem with the fetch operation:', error))
-  }, [setValue])
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch('/api/preparatorias')
+  //       const 
+  //     } catch (err) {
+        
+  //     }
+  //   }
+  //   // fetch('http://localhost:3000/api/preparatorias')
+  //   // .then((response) => response.json())
+  //   // .then((data) => {
+  //   //   if (Array.isArray(data.data)) {
+  //   //     setPreparatorias(data.data)
+  //   //     if (data.data.length > 0) setValue('preparatoria', data.data[0].id.toString())
+  //   //   }
+  //   //   else throw new Error('Invalid data format')
+  //   // })
+  //   // .catch((error) => console.error('There was a problem with the fetch operation:', error))
+  // }, [setValue])
 
   // console.log(preparatorias)
 
@@ -212,7 +220,7 @@ export default function FormSignup() {
               className="mb-6 bg-gray-100 border-2 text-gray-900 text-sm font-semibold rounded-lg border-blue-400 block w-full p-2"
               {...register('preparatoria')}
             >
-              {preparatorias.map((preparatoria) => (
+              {prep.map((preparatoria) => (
                 <option key={preparatoria.id} value={preparatoria.id}>
                   {preparatoria.preparatoria}
                 </option>

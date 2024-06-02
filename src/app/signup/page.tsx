@@ -1,33 +1,16 @@
-"use client"
-
-import { useState, useEffect } from "react";
 import FormSignup from "@/components/forms/signup";
+import { fetchPreparatorias } from "@/lib/data";
 
 interface Preparatoria {
   id: number;
   nombre: string;
 }
 
-export default function SignupPage() {
-  const [preparatorias, setPreparatorias] = useState<Preparatoria[]>([])
-
-  useEffect(() => {
-    fetch('http://localhost:3000/api/preparatorias')
-    .then((response) => {
-      if (!response.ok) throw new Error('Network response was not ok')
-      
-      return response.json()
-    })
-    .then((data) => {
-      if (Array.isArray(data.data)) setPreparatorias(data.data)
-      else throw new Error('Invalid data format')
-    })
-    .catch((error) => console.error('There was a problem with the fetch operation:', error))
-  }, [])
-  
-
+export default async function SignupPage() {
+  const preparatoria = await fetchPreparatorias()
+  console.log(preparatoria)
   return (
-    <main className="h-[90vh]">
+    <main className="h-[89vh]">
       <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]">
         <div className="absolute bottom-0 left-0 right-0 top-0 bg-[radial-gradient(circle_500px_at_50%_200px,#C9EBFF,transparent)]"></div></div>
 
@@ -39,7 +22,7 @@ export default function SignupPage() {
           </h1>
         </div>
         <div className="mt-3 mb-5 sm:mx-auto sm:w-full sm:max-w-sm">
-          <FormSignup />
+          <FormSignup prep={preparatoria} />
           <p className="mt-4 text-center text-sm text-gray-500">
             Ya tiene una Cuenta.
             <a

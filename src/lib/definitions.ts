@@ -4,12 +4,17 @@ export type Area = {
   descripcion: string;
 };
 
+export type Preparatoria = {
+  id: number;
+  preparatoria: string;
+}
+
 export type Facultad = {
   id: string;
-  Facultad: string;
-  SitioWeb: string;
-  Direccion: string;
-  Area: string;
-  Ubicacion: string;
-  Programa: string;
+  facultad: string;
+  sitioWeb: string;
+  direccion: string;
+  area: string;
+  ubicacion: string;
+  programa: string;
 };
