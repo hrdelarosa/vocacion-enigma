@@ -1,40 +1,9 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import CardArea from "../cards/area";
 import Image from "next/image";
-import SkeletonAreas from "../skeleto/cardArea";
+import { fetchAreas } from "@/lib/data";
 
-type Areas = {
-  id: number;
-  area: string;
-  descripcion: string;
-};
-
-export default function ContentAreas() {
-  const [areas, setAresa] = useState<Areas[]>([]);
-  const [inicio, setInicio] = useState(true)
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setInicio(false)
-    }, 1000)
-
-    return () => clearTimeout(timer)
-  }, [])
-
-  useEffect(() => {
-    // try {
-      fetch("/api/areas")
-        .then((response) => response.json())
-        .then((data) => {
-          if (Array.isArray(data.data)) setAresa(data.data);
-          // else throw new Error("Invalid data format");
-        });
-    // } catch (error) {
-    //   console.error("Error fetching universidades:", error);
-    // }
-  }, []);
-
+export default async function ContentAreas() {
+  const areas = await fetchAreas()
 
   return (
     <div className="flex flex-col items-center py-8 px-5 sm:py-12 sm:px-28">
@@ -60,17 +29,14 @@ export default function ContentAreas() {
       </section>
       <div className="grid grid-flow-row justify-center px-4 pt-8 sm:p-0 sm:grid-cols-3 gap-x-14 gap-y-9 sm:pt-10">
         {
-          inicio ? <SkeletonAreas /> : (
-            <>
-              {areas.map((area) => (
-                <CardArea key={area.id} area={area.area} text={`${area.descripcion.split('.')[0]}.`} />
-              ))}
-            </>
-          )
+          areas.map((area) => (
+            <CardArea 
+              key={area.id}
+              area={area.area}
+              text={`${area.descripcion.split('.')[0]}.`}
+            />
+          ))
         }
-        {/* {areas.map((area) => (
-          <CardArea key={area.id} area={area.area} text={`${area.descripcion.split('.')[0]}.`} />
-        ))} */}
       </div>
     </div>
   );

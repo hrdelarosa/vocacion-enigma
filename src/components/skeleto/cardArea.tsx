@@ -4,11 +4,11 @@ const areas = 7;
 
 export default function SkeletonAreas() {
   return (
-    <>
+    <div className="grid grid-flow-row justify-center px-4 pt-8 sm:p-0 sm:grid-cols-3 gap-x-14 gap-y-9 sm:pt-10">
       {[...Array(areas)].map((i) => (
         <CardSkeleton key={i} />
       ))}
-    </>
+    </div>
   );
 }
 

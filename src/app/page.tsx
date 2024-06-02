@@ -8,8 +8,12 @@ import Image from "next/image";
 import { university } from "@/const/university";
 import { test } from "@/const/about-test";
 import { aboutEnigma } from "@/const/information-enigma";
+// import { fetchAreas } from "@/lib/data";
+import { Suspense } from "react";
+import SkeletonAreas from "@/components/skeleto/cardArea";
+import { fetchUniversidades } from "@/lib/data";
 
-export default function Home() {
+export default async function Home() {
   return (
     <>
       <main>
