@@ -1,9 +1,11 @@
-"use client";
+// "use client";
 
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import CardArea from "../cards/area";
 import Image from "next/image";
 import SkeletonAreas from "../skeleto/cardArea";
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+import { cookies } from "next/headers";
 
 type Areas = {
   id: number;
@@ -11,29 +13,35 @@ type Areas = {
   descripcion: string;
 };
 
-export default function ContentAreas() {
-  const [areas, setAresa] = useState<Areas[]>([]);
-  const [inicio, setInicio] = useState(true)
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setInicio(false)
-    }, 1000)
+export default async function ContentAreas() {
+  const supabase = createServerComponentClient({ cookies })
+  const { data: areas } = await supabase.from('areas').select('*')
 
-    return () => clearTimeout(timer)
-  }, [])
+  const areasEstu: Areas[] = areas || []
 
-  useEffect(() => {
-    // try {
-      fetch("/api/areas")
-        .then((response) => response.json())
-        .then((data) => {
-          if (Array.isArray(data.data)) setAresa(data.data);
-          // else throw new Error("Invalid data format");
-        });
-    // } catch (error) {
-    //   console.error("Error fetching universidades:", error);
-    // }
-  }, []);
+  console.log(areasEstu)
+  // const [areas, setAresa] = useState<Areas[]>([]);
+  // const [inicio, setInicio] = useState(true)
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setInicio(false)
+  //   }, 1000)
+
+  //   return () => clearTimeout(timer)
+  // }, [])
+
+  // useEffect(() => {
+  //   // try {
+  //     fetch("/api/areas")
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         if (Array.isArray(data.data)) setAresa(data.data);
+  //         // else throw new Error("Invalid data format");
+  //       });
+  //   // } catch (error) {
+  //   //   console.error("Error fetching universidades:", error);
+  //   // }
+  // }, []);
 
 
   return (
@@ -60,6 +68,15 @@ export default function ContentAreas() {
       </section>
       <div className="grid grid-flow-row justify-center px-4 pt-8 sm:p-0 sm:grid-cols-3 gap-x-14 gap-y-9 sm:pt-10">
         {
+          areasEstu.map((area) => (
+            <CardArea
+              key={area.id}
+              area={area.area}
+              text={`${area.descripcion.split('.')[0]}.`}
+            />
+          ))
+        }
+        {/* {
           inicio ? <SkeletonAreas /> : (
             <>
               {areas.map((area) => (
@@ -67,7 +84,7 @@ export default function ContentAreas() {
               ))}
             </>
           )
-        }
+        } */}
         {/* {areas.map((area) => (
           <CardArea key={area.id} area={area.area} text={`${area.descripcion.split('.')[0]}.`} />
         ))} */}
