@@ -10,7 +10,6 @@ import { test } from "@/const/about-test";
 import { aboutEnigma } from "@/const/information-enigma";
 import { Suspense } from "react";
 import SkeletonAreas from "@/components/skeleto/cardArea";
-import { fetchUniversidades } from "@/lib/data";
 
 export default async function Home() {
   return (
@@ -61,8 +60,9 @@ export default async function Home() {
             height={1229}
           />
         </AboutInformation>
-            
-        <ContentAreas />
+        <Suspense fallback={<SkeletonAreas />}>
+          <ContentAreas />
+        </Suspense>
       </main>
       <Footer />
     </>

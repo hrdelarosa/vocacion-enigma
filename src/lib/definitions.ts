@@ -7,7 +7,7 @@ export type Area = {
 export type Preparatoria = {
   id: number;
   preparatoria: string;
-}
+};
 
 export type Facultad = {
   id: string;
@@ -18,3 +18,14 @@ export type Facultad = {
   ubicacion: string;
   programa: string;
 };
+
+export type Usuario = {
+  full_name: string;
+  email: string;
+  matricula: string;
+  preparatoria: string;
+};
+
+export type Prueba = {
+  
+}
