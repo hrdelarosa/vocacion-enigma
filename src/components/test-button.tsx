@@ -9,7 +9,7 @@ import { cookies } from "next/headers";
 export default async function TestButton({ user }: { user: User | null }) {
   const supabase = createServerComponentClient({ cookies });
 
-  let resultado = null
+  let resultado
   if (user) {
     const { data, error } = await supabase
       .from('usuario')
@@ -21,7 +21,8 @@ export default async function TestButton({ user }: { user: User | null }) {
   
     // Verifica si hubo algún error
     if (error) {
-      throw error;
+      resultado = null
+      return
     }
     // Retorna los datos obtenidos
     resultado = data.cuestionario_id;
