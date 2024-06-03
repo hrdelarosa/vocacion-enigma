@@ -1,12 +1,9 @@
-// 'use client'
-
-import { useEffect, useState } from "react";
 import { areas } from "@/const/area-description";
 import CardUniversities from "../cards/universities";
-import SkeletonUniversities from "../skeleto/universities";
-import AreaSkeleton from "../skeleto/area";
 import { type User } from "@supabase/supabase-js";
-import { getfacultades } from "@/lib/data";
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+import { cookies } from "next/headers";
+import { Facultad } from "@/lib/definitions";
 
 interface Universi {
   id: string
@@ -25,8 +22,12 @@ export default async function ResultArea({
   user: User | null 
   result: string
 }) {
+  const supabase = createServerComponentClient({ cookies })
+  const { data: facultad } = await supabase.rpc('cacultad_query')
+
+  const facultades: Facultad[] = facultad || []
+  console.log(facultad)
   // console.log(result)
-  const facultades = await getfacultades()
   // console.log(facultades)
   const filtradas = facultades.filter(universidad => universidad.area === result);
   // console.log(filtradas)
