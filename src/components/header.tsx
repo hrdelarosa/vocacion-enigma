@@ -11,38 +11,23 @@ import { cookies } from "next/headers";
 export default async function Header({ user }: { user: User | null }) {
   const supabase = createServerComponentClient({ cookies });
 
-  let resultado: string
-  const { data, error } = await supabase
-    .from('usuario')
-    .select(`
-      cuestionario_id
-    `)
-    .eq('email', user?.email || '')
-    .single();
-
-  // Verifica si hubo algún error
-  if (error) {
-    throw error;
-  }
-  // Retorna los datos obtenidos
-  resultado = data.cuestionario_id;
-  // const [result, setResult] = useState<string | null>(null);
+  let resultado = null
+  if (user) {
+    const { data, error } = await supabase
+      .from('usuario')
+      .select(`
+        cuestionario_id
+      `)
+      .eq('email', user?.email || '')
+      .single();
   
-  // useEffect(() => {
-  //   if (user?.email) {
-  //     try {
-  //       fetch(`http://localhost:3000/api/resultado/${user?.email}`)
-  //         .then((response) => response.json())
-  //         .then((data) => {
-  //           if (data.resultado) {
-  //             setResult(data.resultado)
-  //             // console.log(result);
-  //           }
-  //         });
-  //     } catch (error) {
-  //     }
-  //   }
-  // }, [user?.email ,result]);
+    // Verifica si hubo algún error
+    if (error) {
+      throw error;
+    }
+    // Retorna los datos obtenidos
+    resultado = data.cuestionario_id;
+  }
 
   return (
     <nav className="">
