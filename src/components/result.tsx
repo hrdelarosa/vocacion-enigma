@@ -46,13 +46,6 @@ export default async function Result({ user }: { user: User | null }) {
     console.error('Error al obtener el resultado del cuestionario:', error);
     return null;
   }
-  try {
-    const result = await obtenerResultadoCuestionarioPorEmail(user?.email || '')
-    resultado = result?.resultado
-  } catch (error) {
-    console.error("Unexpected error:", error);
-    throw error;
-  }
   
   return (
     <ResultArea user={user} result={resultado} />
