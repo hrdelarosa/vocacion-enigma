@@ -1,14 +1,20 @@
 import { type User } from "@supabase/supabase-js";
 import AccountForm from "./forms/account";
-import { getUser } from "@/lib/data";
-import { Usuario } from "@/lib/definitions";
-
-interface MiObjeto {
-  preparatoria: string;
-}
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
 
 export default async function AccountContent({ user }: { user: User | null }) {
-  const usuario = await getUser(user?.email || '')
+  const supabase = createServerComponentClient({ cookies });
+
+  let usuario
+  const { data, error } = await supabase
+    .from("usuario")
+    .select("full_name, email, matricula, preparatoria_id")
+    // .select("full_name, email, matricula, preparatorias(preparatoria)")
+    .eq("email", user?.email || '');
+
+  if (error) throw error;
+  usuario = data;
   // console.log(usuario)
 
   return (
