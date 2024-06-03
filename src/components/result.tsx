@@ -9,7 +9,9 @@ export default async function Result({ user }: { user: User | null }) {
 
   let resultado: string
   let cuestionario_id
+
   try {
+    let result
     const { data, error } = await supabase
       .from('usuario')
       .select(`
@@ -18,30 +20,35 @@ export default async function Result({ user }: { user: User | null }) {
       .eq('email', user?.email)
       .single();
 
+    // Verifica si hubo algún error
     if (error) {
       throw error;
     }
-    cuestionario_id = data;
-  } catch (error) {
-    console.error('Error al obtener el resultado del cuestionario:', error);
-    return null;
-  }
 
-  try {
-    const { data, error } = await supabase
-      .from('cuestionario')
-      .select(`
-        resultado
-      `)
-      .eq('id', cuestionario_id)
-      .single();
+    // Retorna los datos obtenidos
+    // console.log(data)
+    cuestionario_id =  data.cuestionario_id;
 
-    if (error) {
-      throw error;
+    if (cuestionario_id) {
+      // Realiza la consulta a la base de datos
+      const { data, error } = await supabase
+        .from('cuestionario')
+        .select(`
+          resultado
+        `)
+        .eq('id', cuestionario_id)
+        .single();
+  
+      // Verifica si hubo algún error
+      if (error) {
+        throw error;
+      }
+  
+      // Retorna los datos obtenidos
+      console.log(data)
+      result = data;
     }
-    
-    const result = data
-    resultado = result.resultado;
+    resultado = result?.resultado
   } catch (error) {
     console.error('Error al obtener el resultado del cuestionario:', error);
     return null;
