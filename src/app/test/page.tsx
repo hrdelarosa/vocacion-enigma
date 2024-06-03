@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { createClient } from "@/utils/supabase/server";
-import { startTest } from "@/utils/actions";
-import TermsConditionsTest from "@/components/terminos-test";
+// import { startTest } from "@/utils/actions";
+import FormStartTest from "@/components/forms/test";
 
 export default async function TestPage() {
   const supabase = createClient();
@@ -9,8 +9,6 @@ export default async function TestPage() {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-
-  // console.log(user)
 
   return (
     <main className="flex items-center h-[89vh]">
@@ -31,12 +29,13 @@ export default async function TestPage() {
               ayude a tomar decisiones informadas sobre tu futuro académico y
               profesional.
             </p>
-            <form
+            <FormStartTest user={user} />
+            {/* <form
               className="flex flex-col items-center sm:items-start"
             >
               <div className="flex mt-2 mb-2 justify-center sm:justify-normal sm:mt-5 sm:mb-3">
                 <button
-                  formAction={startTest}
+                  formAction={handleClick}
                   // className={`flex items-center gap-1 
                   // ${user ? 'bg-[#042842] text-[#d9eef4] border-[1px] border-[#d9eef4] cursor-pointer  hover:bg-[#d9eef4] hover:text-[#054a71] hover:border-[#054a71] shadow-2xl' : 'bg-gray-500 text-slate-400 hover:text-red-500 hover:bg-gray-300 hover:border-red-600 cursor-not-allowed'}
                   // py-2 px-8 text-base font-medium transition duration-300 ease-linear`}
@@ -62,7 +61,7 @@ export default async function TestPage() {
               ) : (
                 <p className="text-sm font-medium">Para empezar debera <a className="text-blue-600 hover:underline" href="/login">iniciar sesión</a> antes.</p>
               )}
-            </form>
+            </form> */}
           </div>
           <Image
             className="rounded-2xl w-64 sm:w-[480px]"
