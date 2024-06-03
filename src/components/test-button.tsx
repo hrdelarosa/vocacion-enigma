@@ -3,16 +3,31 @@
 import { useState, useEffect } from "react";
 import { type User } from "@supabase/supabase-js";
 import Link from "next/link";
-import { obtenerIdCuestionario } from "@/lib/data";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
 
 export default async function TestButton({ user }: { user: User | null }) {
+  const supabase = createServerComponentClient({ cookies });
+
   let resultado: string
   try {
-    const result = await obtenerIdCuestionario(user?.email || '')
-    resultado = result?.cuestionario_id
-    console.log(typeof resultado)
+    // Realiza la consulta a la base de datos
+    const { data, error } = await supabase
+      .from('usuario')
+      .select(`
+        cuestionario_id
+      `)
+      .eq('email', user?.email || '')
+      .single();
+
+    // Verifica si hubo algún error
+    if (error) {
+      throw error;
+    }
+    // Retorna los datos obtenidos
+    resultado = data.cuestionario_id;
   } catch (error) {
-    console.error("Unexpected error:", error);
+    console.error('Error al obtener el resultado del cuestionario:', error);
     throw error;
   }
   // const [result, setResult] = useState<string | null>(null);
