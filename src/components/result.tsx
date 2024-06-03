@@ -7,7 +7,7 @@ export default async function Result({ user }: { user: User | null }) {
   try {
     const result = await obtenerResultadoCuestionarioPorEmail(user?.email || '')
     resultado = result?.resultado
-    console.log(resultado)
+    // console.log(resultado)
   } catch (error) {
     console.error("Unexpected error:", error);
     throw error;

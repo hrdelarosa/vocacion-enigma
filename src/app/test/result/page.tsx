@@ -8,7 +8,7 @@ export default async function ResultPage() {
     data: { user },
   } = await supabase.auth.getUser()
   
-  console.log(user?.email)
+  // console.log(user?.email)
 
   return <Result user={user} />
 }
