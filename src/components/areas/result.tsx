@@ -25,11 +25,11 @@ export default async function ResultArea({
   user: User | null 
   result: string
 }) {
-  console.log(result)
+  // console.log(result)
   const facultades = await getfacultades()
-  console.log(facultades)
+  // console.log(facultades)
   const filtradas = facultades.filter(universidad => universidad.area === result);
-  console.log(filtradas)
+  // console.log(filtradas)
   
   // const [universidades, setUniversidades] = useState<Universi[]>([]);
   // const [inicio, setInicio] = useState(true)

@@ -75,13 +75,13 @@ export async function updateUserCuestionarioId(
   }
 }
 
-export async function obtenerResultadoCuestionarioPorEmail(email: string) {
+async function obtenerIdCuestionario(email: string) {
   try {
     // Realiza la consulta a la base de datos
     const { data, error } = await supabase
       .from('usuario')
       .select(`
-        cuestionario (resultado)
+        cuestionario_id
       `)
       .eq('email', email)
       .single();
@@ -92,12 +92,39 @@ export async function obtenerResultadoCuestionarioPorEmail(email: string) {
     }
 
     // Retorna los datos obtenidos
+    // console.log(data)
     return data;
   } catch (error) {
     console.error('Error al obtener el resultado del cuestionario:', error);
     return null;
   }
+}
+export async function obtenerResultadoCuestionarioPorEmail(email: string) {
+  try {
+    const id = await obtenerIdCuestionario(email)
+    const cuestionario_id = id?.cuestionario_id
+    // console.log(id?.cuestionario_id)
+    // Realiza la consulta a la base de datos
+    const { data, error } = await supabase
+      .from('cuestionario')
+      .select(`
+        resultado
+      `)
+      .eq('id', cuestionario_id)
+      .single();
 
+    // Verifica si hubo algún error
+    if (error) {
+      throw error;
+    }
+
+    // Retorna los datos obtenidos
+    console.log(data)
+    return data;
+  } catch (error) {
+    console.error('Error al obtener el resultado del cuestionario:', error);
+    return null;
+  }
 }
 
 export async function insertUser({
