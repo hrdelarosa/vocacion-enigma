@@ -4,7 +4,6 @@ import Question from "@/components/question";
 import React, { useState, useEffect } from "react";
 import { preguntas } from "@/const/test-chaside";
 import { useRouter } from "next/navigation";
-import { InsertPruebaFunction } from "@/lib/definitions";
 import { insertPruebaFunction } from "@/lib/data";
 
 export default function StartTestContent() {
