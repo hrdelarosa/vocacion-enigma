@@ -21,7 +21,5 @@ export type Usuario = {
   full_name: string;
   email: string;
   matricula: string;
-  preparatorias: { 
-    preparatoria: string
-  }[];
+  preparatoria_id: number
 };

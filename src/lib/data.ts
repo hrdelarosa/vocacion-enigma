@@ -134,11 +134,32 @@ export async function insertUser({
 export async function getUser(email: string) {
   const { data, error } = await supabase
     .from("usuario")
-    .select("full_name, email, matricula, preparatorias(preparatoria)")
+    .select("full_name, email, matricula, preparatoria_id")
+    // .select("full_name, email, matricula, preparatorias(preparatoria)")
     .eq("email", email);
 
   if (error) throw error;
   return data;
+}
+
+export async function getPreparatoria(email: string) {
+  try {
+    // Realiza la consulta a la base de datos
+    const { data, error } = await supabase
+    .from("usuario")
+    .select("preparatorias(preparatoria)")
+    .eq("email", email);
+
+    if (error) {
+      throw error;
+    }
+
+    console.log(data[0].preparatorias)
+    return data[0].preparatorias;
+  } catch (error) {
+    console.error('Error al obtener la preparatoria:', error);
+    return null;
+  }
 }
 
 export async function getfacultades() {

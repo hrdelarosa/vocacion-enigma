@@ -1,13 +1,15 @@
 import { type User } from "@supabase/supabase-js";
-import AccountSkeleton from "./skeleto/account";
 import AccountForm from "./forms/account";
 import { getUser } from "@/lib/data";
 import { Usuario } from "@/lib/definitions";
 
+interface MiObjeto {
+  preparatoria: string;
+}
+
 export default async function AccountContent({ user }: { user: User | null }) {
-  const usuario: Usuario[] = await getUser(user?.email || '')
-  // console.log(usuario[0].preparatorias.preparatoria)
-  // console.log(prepa)
+  const usuario = await getUser(user?.email || '')
+  // console.log(usuario)
 
   return (
     <section className="flex flex-col justify-center items-center h-[89vh]">

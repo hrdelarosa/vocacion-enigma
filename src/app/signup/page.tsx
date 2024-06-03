@@ -8,6 +8,7 @@ export default async function SignupPage() {
   const { data: preparatorias } = await supabase.from('preparatorias').select('*')
 
   const preparatoria: Preparatoria[] = preparatorias || []
+  console.log(preparatoria)
 
   return (
     <main className="h-[89vh]">
