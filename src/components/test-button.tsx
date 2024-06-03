@@ -3,9 +3,18 @@
 import { useState, useEffect } from "react";
 import { type User } from "@supabase/supabase-js";
 import Link from "next/link";
-import { obtenerResultadoCuestionarioPorEmail } from "@/lib/data";
+import { obtenerIdCuestionario } from "@/lib/data";
 
-export default async function TestButton({ user, resultado }: { user: User | null, resultado: boolean }) {
+export default async function TestButton({ user }: { user: User | null }) {
+  let resultado: string
+  try {
+    const result = await obtenerIdCuestionario(user?.email || '')
+    resultado = result?.cuestionario_id
+    console.log(typeof resultado)
+  } catch (error) {
+    console.error("Unexpected error:", error);
+    throw error;
+  }
   // const [result, setResult] = useState<string | null>(null);
 
   // console.log(resultado)

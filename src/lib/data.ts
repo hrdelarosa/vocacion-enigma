@@ -75,7 +75,7 @@ export async function updateUserCuestionarioId(
   }
 }
 
-async function obtenerIdCuestionario(email: string) {
+export async function obtenerIdCuestionario(email: string) {
   try {
     // Realiza la consulta a la base de datos
     const { data, error } = await supabase

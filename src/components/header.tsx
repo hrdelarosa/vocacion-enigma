@@ -5,9 +5,18 @@ import Link from "next/link";
 import { type User } from "@supabase/supabase-js";
 import DropDown from "./dropDown";
 import { useState, useEffect } from "react";
-import { obtenerResultadoCuestionarioPorEmail } from "@/lib/data";
+import { obtenerIdCuestionario } from "@/lib/data";
 
-export default async function Header({ user, resultado }: { user: User | null, resultado: boolean }) {
+export default async function Header({ user }: { user: User | null }) {
+  let resultado: string
+  try {
+    const result = await obtenerIdCuestionario(user?.email || '')
+    resultado = result?.cuestionario_id
+    console.log(typeof resultado)
+  } catch (error) {
+    console.error("Unexpected error:", error);
+    throw error;
+  }
   // const [result, setResult] = useState<string | null>(null);
   
   // useEffect(() => {
