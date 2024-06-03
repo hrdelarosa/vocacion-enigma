@@ -7,7 +7,35 @@ import crypto from "node:crypto";
 import bcrypt from "bcrypt";
 import { Facultad } from "./definitions";
 
+// Crea una instancia de Supabase
 const supabase = createServerComponentClient({ cookies });
+
+async function insertPruebaFunction(respuestas: number[]) {
+  const result = resultadoArea(respuestas);
+
+  const newEntry = {
+    respuestas: JSON.stringify(respuestas),
+    resultado: result,
+  };
+
+  const { data, error } = await supabase
+    .from("cuestionario")
+    .insert([newEntry])
+    .select();
+
+  if (error) {
+    console.error("Error inserting data:", error);
+    return { success: false, error };
+  }
+
+  console.log("Data inserted:", data);
+  return { success: true, data };
+}
+
+export { insertPruebaFunction };
+
+
+
 
 export async function insertPrueba(respuestas: number[]) {
   const result = resultadoArea(respuestas);

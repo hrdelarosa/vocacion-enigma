@@ -5,12 +5,9 @@ import React, { useState, useEffect } from "react";
 import { preguntas } from "@/const/test-chaside";
 import { useRouter } from "next/navigation";
 import { InsertPruebaFunction } from "@/lib/definitions";
+import { insertPruebaFunction } from "@/lib/data";
 
-export default function StartTestContent({
-  insertPrueba,
-}: {
-  insertPrueba: InsertPruebaFunction;
-}) {
+export default function StartTestContent() {
   const [preguntaActual, setPreguntaActual] = useState(0);
   const [textoBoton, setTextoBoton] = useState("Siguiente");
   const [resultado, setResultado] = useState<number[]>([]);
@@ -83,15 +80,12 @@ export default function StartTestContent({
           //   } catch (error) {
           //     console.error("Error fetching Prueba:", error);
           //   }
-          const { success, data, error } = await insertPrueba(resultado);
-          console.log(data)
-          if (success) {
-            window.localStorage.removeItem("repuestasUser");
-            window.localStorage.removeItem("preguntaActual");
-            router.push("/test/finished");
-          } else {
-            console.error("Error insertando prueba:", error);
-          }
+          const result = await insertPruebaFunction(resultado);
+          console.log(result);
+
+          window.localStorage.removeItem("repuestasUser");
+          window.localStorage.removeItem("preguntaActual");
+          router.push("/test/finished");
         }
       } else {
         if (preguntaActual < totalPregun - 1) {
@@ -114,15 +108,12 @@ export default function StartTestContent({
           //   } catch (error) {
           //     console.error("Error fetching Prueba:", error);
           //   }
-          const { success, data, error } = await insertPrueba(resultado);
-          console.log(data)
-          if (success) {
-            window.localStorage.removeItem("repuestasUser");
-            window.localStorage.removeItem("preguntaActual");
-            router.push("/test/finished");
-          } else {
-            console.error("Error insertando prueba:", error);
-          }
+          const result = await insertPruebaFunction(resultado);
+          console.log(result);
+          
+          window.localStorage.removeItem("repuestasUser");
+          window.localStorage.removeItem("preguntaActual");
+          router.push("/test/finished");
         }
       }
 
