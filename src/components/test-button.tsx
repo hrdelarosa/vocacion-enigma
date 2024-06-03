@@ -10,26 +10,20 @@ export default async function TestButton({ user }: { user: User | null }) {
   const supabase = createServerComponentClient({ cookies });
 
   let resultado: string
-  try {
-    // Realiza la consulta a la base de datos
-    const { data, error } = await supabase
-      .from('usuario')
-      .select(`
-        cuestionario_id
-      `)
-      .eq('email', user?.email || '')
-      .single();
+  const { data, error } = await supabase
+    .from('usuario')
+    .select(`
+      cuestionario_id
+    `)
+    .eq('email', user?.email || '')
+    .single();
 
-    // Verifica si hubo algún error
-    if (error) {
-      throw error;
-    }
-    // Retorna los datos obtenidos
-    resultado = data.cuestionario_id;
-  } catch (error) {
-    console.error('Error al obtener el resultado del cuestionario:', error);
+  // Verifica si hubo algún error
+  if (error) {
     throw error;
   }
+  // Retorna los datos obtenidos
+  resultado = data.cuestionario_id;
   // const [result, setResult] = useState<string | null>(null);
 
   // console.log(resultado)
