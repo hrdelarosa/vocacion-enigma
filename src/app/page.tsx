@@ -9,7 +9,11 @@ import { university } from "@/const/university";
 import { test } from "@/const/about-test";
 import { aboutEnigma } from "@/const/information-enigma";
 
-export default function Home() {
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+import { cookies } from "next/headers";
+
+export default async function Home() {
+
   return (
     <>
       <main>

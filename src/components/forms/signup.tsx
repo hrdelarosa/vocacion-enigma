@@ -1,17 +1,12 @@
 "use client";
 
 import { signup } from "@/utils/actions";
-import { useState, useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { userSignScheme } from "@/schema/user";
 import TermsConditions from "../terminos";
 import toast from "react-hot-toast";
-
-interface Preparatoria {
-  id: number;
-  preparatoria: string;
-}
+import { Preparatoria } from "@/lib/definitions";
 
 type Inputs = {
   fullname: string
@@ -27,15 +22,13 @@ const comfirmEmail = () => toast.success("Te hemos enviado un correo de confirma
   duration: 7000,
 })
 
-export default function FormSignup() {
+export default function FormSignup({ prep }: { prep: Preparatoria[] }) {
   const { register, handleSubmit, watch, setValue ,formState: { errors } } = useForm<Inputs>({
     resolver: zodResolver(userSignScheme),
     defaultValues: {
       preparatoria: '1'
     }
   })
-
-  const [preparatorias, setPreparatorias] = useState<Preparatoria[]>([])
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const formdata = new FormData()
@@ -48,21 +41,6 @@ export default function FormSignup() {
     signup(formdata)
     comfirmEmail()
   }
-
-  useEffect(() => {
-    fetch('http://localhost:3000/api/preparatorias')
-    .then((response) => response.json())
-    .then((data) => {
-      if (Array.isArray(data.data)) {
-        setPreparatorias(data.data)
-        if (data.data.length > 0) setValue('preparatoria', data.data[0].id.toString())
-      }
-      else throw new Error('Invalid data format')
-    })
-    .catch((error) => console.error('There was a problem with the fetch operation:', error))
-  }, [setValue])
-
-  // console.log(preparatorias)
 
   return (
     <form className="space-y-2" onSubmit={handleSubmit(onSubmit)}>
@@ -212,7 +190,7 @@ export default function FormSignup() {
               className="mb-6 bg-gray-100 border-2 text-gray-900 text-sm font-semibold rounded-lg border-blue-400 block w-full p-2"
               {...register('preparatoria')}
             >
-              {preparatorias.map((preparatoria) => (
+              {prep.map((preparatoria) => (
                 <option key={preparatoria.id} value={preparatoria.id}>
                   {preparatoria.preparatoria}
                 </option>

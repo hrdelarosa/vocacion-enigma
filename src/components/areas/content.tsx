@@ -6,6 +6,7 @@ import Image from "next/image";
 import SkeletonAreas from "../skeleto/cardArea";
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from "next/headers";
+import { getUserIdByEmail } from "@/lib/data";
 
 type Areas = {
   id: number;
@@ -19,7 +20,9 @@ export default async function ContentAreas() {
 
   const areasEstu: Areas[] = areas || []
 
-  console.log(areasEstu)
+  
+
+  // console.log(areasEstu)
   // const [areas, setAresa] = useState<Areas[]>([]);
   // const [inicio, setInicio] = useState(true)
   // useEffect(() => {
@@ -76,18 +79,6 @@ export default async function ContentAreas() {
             />
           ))
         }
-        {/* {
-          inicio ? <SkeletonAreas /> : (
-            <>
-              {areas.map((area) => (
-                <CardArea key={area.id} area={area.area} text={`${area.descripcion.split('.')[0]}.`} />
-              ))}
-            </>
-          )
-        } */}
-        {/* {areas.map((area) => (
-          <CardArea key={area.id} area={area.area} text={`${area.descripcion.split('.')[0]}.`} />
-        ))} */}
       </div>
     </div>
   );

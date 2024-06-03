@@ -4,36 +4,43 @@ import { useCallback, useEffect, useState } from "react";
 import { createClient } from "@/utils/supabase/client";
 import AccountSkeleton from "../skeleto/account";
 import { type User } from "@supabase/supabase-js";
+import { Usuario } from "@/lib/definitions";
 
-export default function AccountForm({ user }: { user: User | null }) {
+export default function AccountForm({ user }: { user: Usuario }) {
   // const supabase = createClient();
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const [fullname, setFullname] = useState<string | null>(null);
   const [matricula, setMatricula] = useState<string | null>(null);
   const [preparatoria, setPreparatoria] = useState<string | null>(null);
 
-  const getProfile = useCallback(async () => {
-    try {
-      setLoading(true);
-      // console.log(user?.email)
+  useEffect(() => {
+    setFullname(user.full_name);
+    setMatricula(user.matricula);
+    setPreparatoria(user.preparatorias.preparatoria);
+  }, [user.full_name, user.matricula, user.preparatorias]);
 
-      fetch(`http://localhost:3000/api/usuarios/${user?.email}`)
-        .then((response) => response.json())
-        .then((data) => {
-          if (Array.isArray(data.user)) {
-            // console.log(data.user);
-            setFullname(data.user[0].full_name);
-            setMatricula(data.user[0].matricula);
-            setPreparatoria(data.user[0].Preparatoria);
-          }
-        });
-    } catch (error) {
-      console.error(error);
-      alert("Error loading user data!");
-    } finally {
-      setLoading(false);
-    }
-  }, [user]);
+  // const getProfile = useCallback(async () => {
+  //   try {
+  //     setLoading(true);
+  //     // console.log(user?.email)
+
+  //     fetch(`http://localhost:3000/api/usuarios/${user?.email}`)
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         if (Array.isArray(data.user)) {
+  //           // console.log(data.user);
+  //           setFullname(data.user[0].full_name);
+  //           setMatricula(data.user[0].matricula);
+  //           setPreparatoria(data.user[0].Preparatoria);
+  //         }
+  //       });
+  //   } catch (error) {
+  //     console.error(error);
+  //     alert("Error loading user data!");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // }, [user]);
 
   const [account, setAccount] = useState(true);
 
@@ -47,9 +54,9 @@ export default function AccountForm({ user }: { user: User | null }) {
 
   // console.log(fullname, matricula, preparatoria)
 
-  useEffect(() => {
-    getProfile();
-  }, [user, getProfile]);
+  // useEffect(() => {
+  //   getProfile();
+  // }, [user, getProfile]);
 
   return (
     <>

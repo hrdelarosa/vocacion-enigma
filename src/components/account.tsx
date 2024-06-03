@@ -1,20 +1,13 @@
-'use client'
-
-import { useEffect, useState } from "react";
 import { type User } from "@supabase/supabase-js";
 import AccountSkeleton from "./skeleto/account";
 import AccountForm from "./forms/account";
+import { getUser } from "@/lib/data";
+import { Usuario } from "@/lib/definitions";
 
-export default function AccountContent({ user }: { user: User | null }) {
-  const [account, setAccount] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setAccount(false);
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, []);
+export default async function AccountContent({ user }: { user: User | null }) {
+  const usuario: Usuario[] = await getUser(user?.email || '')
+  // console.log(usuario[0].preparatorias.preparatoria)
+  // console.log(prepa)
 
   return (
     <section className="flex flex-col justify-center items-center h-[89vh]">
@@ -25,7 +18,7 @@ export default function AccountContent({ user }: { user: User | null }) {
           <p className="mt-2 text-lg sm:text-2xl">Estos son tus datos...</p>
         </div>
         <div className="mt-3 sm:mt-7 gap-x-6">
-          <AccountForm user={user} />
+          <AccountForm user={usuario[0]} />
         </div>
       </div>
     </section>
