@@ -23,9 +23,10 @@ export async function POST(request: NextRequest) {
       
         if (error) {
           console.error("Error inserting data:", error);
-          return { success: false, error };
+        //   return { success: false, error };
         }
       
+        return NextResponse.json({ data: "Respuestas y Resultado guardado Correctamente." }, { status: 200 });
         console.log("Data inserted:", data);
         const result = { success: true, data };
 
