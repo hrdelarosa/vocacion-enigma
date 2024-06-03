@@ -35,16 +35,16 @@ export default async function TestButton({ user }: { user: User | null }) {
         resultado === null ? (
           <Link
             className="bg-blue-950 hover:bg-blue-900 text-white border-blue-950 border-2 font-medium transition-all ease-in-out duration-300 rounded-lg text-base px-5 py-2 md:px-8 md:py-2.5 cursor-pointer"
-            href={user ? "/test" : "/login"}
+            href={"/test/result"}
           >
-            Comenzar
+            Resultado
           </Link>
         ) : (
           <Link
             className="bg-blue-950 hover:bg-blue-900 text-white border-blue-950 border-2 font-medium transition-all ease-in-out duration-300 rounded-lg text-base px-5 py-2 md:px-8 md:py-2.5 cursor-pointer"
-            href={"/test/result"}
+            href={user ? "/test" : "/login"}
           >
-            Resultado
+            Comenzar
           </Link>
         )
       }
