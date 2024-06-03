@@ -1,20 +1,21 @@
-'use client'
-
-import { useEffect, useState } from "react";
 import { type User } from "@supabase/supabase-js";
-import AccountSkeleton from "./skeleto/account";
 import AccountForm from "./forms/account";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
 
-export default function AccountContent({ user }: { user: User | null }) {
-  const [account, setAccount] = useState(true);
+export default async function AccountContent({ user }: { user: User | null }) {
+  const supabase = createServerComponentClient({ cookies });
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setAccount(false);
-    }, 1000);
+  let usuario
+  const { data, error } = await supabase
+    .from("usuario")
+    .select("full_name, email, matricula, preparatoria_id")
+    // .select("full_name, email, matricula, preparatorias(preparatoria)")
+    .eq("email", user?.email || '');
 
-    return () => clearTimeout(timer);
-  }, []);
+  if (error) throw error;
+  usuario = data;
+  // console.log(usuario)
 
   return (
     <section className="flex flex-col justify-center items-center h-[89vh]">
@@ -25,7 +26,7 @@ export default function AccountContent({ user }: { user: User | null }) {
           <p className="mt-2 text-lg sm:text-2xl">Estos son tus datos...</p>
         </div>
         <div className="mt-3 sm:mt-7 gap-x-6">
-          <AccountForm user={user} />
+          <AccountForm user={usuario[0]} />
         </div>
       </div>
     </section>

@@ -1,14 +1,15 @@
 import FormSignup from "@/components/forms/signup";
-import { fetchPreparatorias } from "@/lib/data";
-
-interface Preparatoria {
-  id: number;
-  nombre: string;
-}
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+import { cookies } from "next/headers";
+import { Preparatoria } from "@/lib/definitions";
 
 export default async function SignupPage() {
-  const preparatoria = await fetchPreparatorias()
+  const supabase = createServerComponentClient({ cookies })
+  const { data: preparatorias } = await supabase.from('preparatorias').select('*')
+
+  const preparatoria: Preparatoria[] = preparatorias || []
   console.log(preparatoria)
+
   return (
     <main className="h-[89vh]">
       <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]">

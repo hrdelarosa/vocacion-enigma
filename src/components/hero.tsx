@@ -11,9 +11,6 @@ export default async function Hero() {
 
   return (
     <section className="flex items-center h-[91vh]">
-      {/* <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)]">
-        <div className="absolute bottom-0 left-0 right-0 top-0 bg-[radial-gradient(circle_500px_at_50%_200px,#C9EBFF,transparent)]"></div>
-      </div> */}
       <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]">
         <div className="absolute bottom-0 left-0 right-0 top-0 bg-[radial-gradient(circle_500px_at_50%_200px,#C9EBFF,transparent)]"></div></div>
 
@@ -30,13 +27,6 @@ export default async function Hero() {
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <TestButton user={user} />
-            {/* <a
-              className="flex items-center gap-1 bg-[#042842] text-[#d9eef4] border-[1px] border-[#d9eef4] cursor-pointer py-2 px-8 text-base font-medium transition duration-300 ease-linear hover:bg-[#d9eef4] hover:text-[#054a71] hover:border-[#054a71] shadow-2xl"
-              href={user ? (result ? '/test/result' : '/test' ) : '/login'}
-              // href={user ? '/test' : '/login'}
-            >
-              Comenzar
-            </a> */}
           </div>
         </div>
       </div>

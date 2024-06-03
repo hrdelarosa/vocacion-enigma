@@ -1,10 +1,21 @@
+// 'use client'
+
 import Image from "next/image";
+import ContentUniversities from "@/components/universities/content";
+import SkeletonUniversities from "@/components/skeleto/universities";
+// import { useEffect, useState } from "react";
 import "./universities.css";
 import Universities from "@/components/universities/universities";
-import { Suspense } from "react";
-import SkeletonUniversities from "@/components/skeleto/universities";
 
-export default async function UniversidadesPage() {
+export default function UniversidadesPage() {
+  // const [inicio, setInicio] = useState(true)
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setInicio(false)
+  //   }, 1000)
+
+  //   return () => clearTimeout(timer)
+  // }, [])
 
   return (
     <main className="mx-5 items-center py-24 sm:mx-auto sm:max-w-7xl">
@@ -70,9 +81,10 @@ export default async function UniversidadesPage() {
           </label>
         </div>
         <section className="grid grid-flow-row justify-center sm:grid-cols-3 gap-x-14 gap-y-6 pt-8">
-          <Suspense fallback={<SkeletonUniversities />}>
-            <Universities />
-          </Suspense>
+          <Universities />
+          {/* {
+            inicio ? <SkeletonUniversities/> : <ContentUniversities />
+          }           */}
         </section>
       </div>
     </main>

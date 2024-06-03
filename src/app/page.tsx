@@ -12,7 +12,11 @@ import { Suspense } from "react";
 import SkeletonAreas from "@/components/skeleto/cardArea";
 import { fetchUniversidades } from "@/lib/data";
 
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+import { cookies } from "next/headers";
+
 export default async function Home() {
+
   return (
     <>
       <main>

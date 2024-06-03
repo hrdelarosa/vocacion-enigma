@@ -1,29 +1,33 @@
-"use client"
+// "use client"
 
 import Image from "next/image";
 import Link from "next/link";
 import { type User } from "@supabase/supabase-js";
 import DropDown from "./dropDown";
 import { useState, useEffect } from "react";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
 
-export default function Header({ user }: { user: User | null }) {
-  const [result, setResult] = useState<string | null>(null);
+export default async function Header({ user }: { user: User | null }) {
+  const supabase = createServerComponentClient({ cookies });
+
+  let resultado = null
+  if (user) {
+    const { data, error } = await supabase
+      .from('usuario')
+      .select(`
+        cuestionario_id
+      `)
+      .eq('email', user?.email || '')
+      .single();
   
-  useEffect(() => {
-    if (user?.email) {
-      try {
-        fetch(`http://localhost:3000/api/resultado/${user?.email}`)
-          .then((response) => response.json())
-          .then((data) => {
-            if (data.resultado) {
-              setResult(data.resultado)
-              // console.log(result);
-            }
-          });
-      } catch (error) {
-      }
+    // Verifica si hubo algún error
+    if (error) {
+      throw error;
     }
-  }, [user?.email ,result]);
+    // Retorna los datos obtenidos
+    resultado = data.cuestionario_id;
+  }
 
   return (
     <nav className="">
@@ -73,7 +77,7 @@ export default function Header({ user }: { user: User | null }) {
             </>
           )}
 
-          <DropDown user={user} result={result} />
+          <DropDown user={user} result={resultado} />
 
         </div>
         <div
@@ -100,7 +104,7 @@ export default function Header({ user }: { user: User | null }) {
             </li>
             <li>
             <Link
-                href={user ? (result ? "/test/result" : "/test") : "/test"}
+                href={user ? (resultado ? "/test/result" : "/test") : "/test"}
                 className="block py-2 px-3 text-gray-700 font-semibold border-b md:border-0 md:hover:text-blue-700 md:p-0 transition ease-out duration-300 hover:scale-105 hover:-translate-y-[1px]"
               >
                 Prueba

@@ -5,6 +5,7 @@ import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
 import { createClient } from "@/utils/supabase/server";
+import { obtenerResultadoCuestionarioPorEmail } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Vocación Enigma",
