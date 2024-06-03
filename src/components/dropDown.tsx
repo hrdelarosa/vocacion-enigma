@@ -9,7 +9,7 @@ export default function DropDown({
   result 
 }: { 
   user: User | null 
-  result: string | null
+  result: boolean
 }) {
     const [isOpen, setIsOpen] = useState(false);
 

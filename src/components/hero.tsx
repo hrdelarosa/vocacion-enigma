@@ -1,5 +1,6 @@
 import { createClient } from "@/utils/supabase/server";
 import TestButton from "./test-button";
+import { obtenerResultadoCuestionarioPorEmail } from "@/lib/data";
 
 
 export default async function Hero() {
@@ -8,6 +9,19 @@ export default async function Hero() {
   const {
     data: { user },
   } = await supabase.auth.getUser()
+
+  let resultado: string
+  let prueba: boolean = false
+  try {
+    const result = await obtenerResultadoCuestionarioPorEmail(user?.email || '')
+    resultado = result?.resultado
+    console.log(resultado)
+    if (result) prueba = true
+    else if (!result) prueba = false
+  } catch (error) {
+    console.error("Unexpected error:", error);
+    throw error;
+  }
 
   return (
     <section className="flex items-center h-[91vh]">
@@ -29,7 +43,7 @@ export default async function Hero() {
             a tomar decisiones informadas sobre tu futuro profesional.
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
-            <TestButton user={user} />
+            <TestButton user={user} resultado={prueba} />
             {/* <a
               className="flex items-center gap-1 bg-[#042842] text-[#d9eef4] border-[1px] border-[#d9eef4] cursor-pointer py-2 px-8 text-base font-medium transition duration-300 ease-linear hover:bg-[#d9eef4] hover:text-[#054a71] hover:border-[#054a71] shadow-2xl"
               href={user ? (result ? '/test/result' : '/test' ) : '/login'}

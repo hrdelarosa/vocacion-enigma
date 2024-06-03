@@ -7,7 +7,7 @@ import DropDown from "./dropDown";
 import { useState, useEffect } from "react";
 import { obtenerResultadoCuestionarioPorEmail } from "@/lib/data";
 
-export default async function Header({ user }: { user: User | null }) {
+export default async function Header({ user, resultado }: { user: User | null, resultado: boolean }) {
   // const [result, setResult] = useState<string | null>(null);
   
   // useEffect(() => {
@@ -25,15 +25,6 @@ export default async function Header({ user }: { user: User | null }) {
   //     }
   //   }
   // }, [user?.email ,result]);
-  let resultado: string
-  try {
-    const result = await obtenerResultadoCuestionarioPorEmail(user?.email || '')
-    resultado = result?.resultado
-    // console.log(resultado)
-  } catch (error) {
-    console.error("Unexpected error:", error);
-    throw error;
-  }
 
   return (
     <nav className="">

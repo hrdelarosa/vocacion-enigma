@@ -5,19 +5,10 @@ import { type User } from "@supabase/supabase-js";
 import Link from "next/link";
 import { obtenerResultadoCuestionarioPorEmail } from "@/lib/data";
 
-export default async function TestButton({ user }: { user: User | null }) {
+export default async function TestButton({ user, resultado }: { user: User | null, resultado: boolean }) {
   // const [result, setResult] = useState<string | null>(null);
-  let resultado: string
-  try {
-    const result = await obtenerResultadoCuestionarioPorEmail(user?.email || '')
-    resultado = result?.resultado
-    // console.log(resultado)
-  } catch (error) {
-    console.error("Unexpected error:", error);
-    throw error;
-  }
 
-  console.log(resultado)
+  // console.log(resultado)
   // useEffect(() => {
   //   if (user) {
   //     try {
