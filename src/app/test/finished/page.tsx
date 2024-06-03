@@ -1,6 +1,5 @@
 import FinishedArea from "@/components/areas/finished";
 import Link from "next/link";
-import { getLastCuestionarioId, getUserIdByEmail, updateUserCuestionarioId } from "@/lib/data";
 import { createClient } from "@/utils/supabase/server"
 
 export default async function FinishedPage() {
@@ -55,19 +54,6 @@ export default async function FinishedPage() {
   } catch (error) {
     console.error("Unexpected error:", error);
   }
-  // try {
-  //   const cuestionarioId = await getLastCuestionarioId();
-  //   const userId = await getUserIdByEmail(user?.email || '');
-  //   // console.log('id usuario',userId)
-
-  //   if (cuestionarioId === null) throw new Error('No se pudo obtener el último cuestionario');
-  //   if (userId === null) throw new Error('No se pudo encontrar el usuario con el email proporcionado');
-
-  //   await updateUserCuestionarioId(userId, cuestionarioId);
-  // } catch (error) {
-  //   console.error("Unexpected error:", error);
-  //   throw error;
-  // }
 
   return (
     <FinishedArea>
