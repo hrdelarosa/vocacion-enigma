@@ -23,9 +23,9 @@ export default function Footer() {
               width={172}
               height={136}
             />
-            <span className="self-center text-2xl font-bold whitespace-nowrap text-black">
+            {/* <span className="self-center text-2xl font-bold whitespace-nowrap text-black">
               Enigma
-            </span>
+            </span> */}
           </Link>
           <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-600 sm:mb-0">
             <li>

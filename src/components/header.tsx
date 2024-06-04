@@ -40,9 +40,9 @@ export default async function Header({ user }: { user: User | null }) {
             width={172}
             height={136}
           />
-          <span className="self-center text-2xl font-semibold whitespace-nowrap hidden sm:block text-black">
+          {/* <span className="self-center text-2xl font-semibold whitespace-nowrap hidden sm:block text-black">
             Enigma
-          </span>
+          </span> */}
         </Link>
 
         <div className="flex items-center md:order-2 space-x-1 md:space-x-2 rtl:space-x-reverse">
