@@ -34,8 +34,8 @@ Este proyecto es una aplicación web diseñada para ayudar a los usuarios a iden
     - [![Next.js][Next.js-badge]][Next.js-url] - Un framework de trabajo React para el desarrollo de aplicaciones web estáticas y dinámicas.
     - [![Typescript][typescript-badge]][typescript-url] - Es un superconjunto de JavaScript, que esencialmente añade tipos estáticos y objetos basados en clases.
     - [![Tailwind CSS][tailwind-badge]][tailwind-url] -Un framework de trabajo CSS que prioriza las utilidades para crear rápidamente diseños personalizados.
-- Backend: Endpoints de Next.js usando API Routes .
-- Base de Datos: [![MySQL][MySQL-badge]][MySQL-url] - Un sistema de gestión de bases de datos relacional.
+- Backend: [![Supabase][Supabase-badge]][Supabase-url].
+- Base de Datos: [![Postgresql][Postgresql-badge]][Postgresql-url] - Un sistema de gestión de bases de datos relacional.
 
 ## Para empezar
 
@@ -54,12 +54,18 @@ Este proyecto es una aplicación web diseñada para ayudar a los usuarios a iden
      ```
 
 3. Configurar la base de datos:
-    - Asegúrate de tener tu base de datos MySQL en funcionamiento.(si es necesario linkear con proyecto)
-    - Configura la conexión de MySQL en el archivo `db.ts`.
-    [Script para crear la Base de Datos](https://drive.google.com/file/d/14Me-AexVD4K5emThscmPNnQUHURBIA0s/view?usp=drive_link)
+    - Asegúrate de tener tu base de datos en funcionamiento (en este caso en Supabase).
+    - Debera de tener la informacion que es necesaria en la base de datos (dentro del script esta).
+    - Configura la conexión de de la base de datos de Supabase. (no sera necessario por que si usa la autencicacion con Supabase solo tendra que hacer lo <a href="#autenticacion-email">siguiente</a> para que le funcionen la autenticacion y la base de datos).
+    [Script para crear las tablas Base de Datos](https://drive.google.com/file/d/14Me-AexVD4K5emThscmPNnQUHURBIA0s/view?usp=drive_link)
 
      ```sh
-     CREATE DATABASE bd_vocacion_enigma;
+     -- Tabla Areas
+     CREATE TABLE Areas (
+     id SERIAL PRIMARY KEY,
+     area VARCHAR(255) NOT NULL,
+     descripcion TEXT NOT NULL
+     );
      ...
      ```
 
@@ -75,7 +81,9 @@ Este proyecto es una aplicación web diseñada para ayudar a los usuarios a iden
 
      - Abre tu navegador web y ve a http://localhost:3000.
 
-3. Autenticación mediante email
+<a name="autenticacion-email"></a>
+
+3. Autenticación mediante email 
     - Accede a [![Supabase][Supabase-badge]][Supabase-url], crea y configura tu proyecto.
     - Obtén el Project URL y Project API keys (anon) del proyecto.
     - Crea un archivo llamado ```.env.local``` e integra estas variabes y reemplaza su valor por tu URL y Keys
@@ -89,11 +97,11 @@ Este proyecto es una aplicación web diseñada para ayudar a los usuarios a iden
 [Next.js-url]: https://nextjs.org/
 [typescript-url]: https://www.typescriptlang.org/
 [tailwind-url]: https://tailwindcss.com/
-[MySQL-url]:https://www.mysql.com/
+[Postgresql-url]: https://www.postgresql.org/
 [Supabase-url]: https://supabase.com/
 
 [Next.js-badge]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [typescript-badge]: https://img.shields.io/badge/Typescript-007ACC?style=for-the-badge&logo=typescript&logoColor=white&color=blue
 [tailwind-badge]: https://img.shields.io/badge/Tailwind-ffffff?style=for-the-badge&logo=tailwindcss&logoColor=38bdf8
-[MySQL-badge]: https://img.shields.io/badge/-MySQL-4479A1?style=flat-square&logo=mysql&labelColor=4479A1&logoColor=FFF
+[Postgresql-badge]: https://img.shields.io/badge/postgresql-4169e1?style=for-the-badge&logo=postgresql&logoColor=white
 [Supabase-badge]: https://shields.io/badge/supabase-black?logo=supabase&style=for-the-badge
