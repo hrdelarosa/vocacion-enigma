@@ -23,7 +23,7 @@ export async function login(formData: FormData): Promise<boolean> {
     }
 
     revalidatePath('/', 'layout')
-    redirect('/account')
+    redirect('/')
 }
 
 export async function signup(formData: FormData) {

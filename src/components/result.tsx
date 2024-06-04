@@ -1,6 +1,5 @@
 import ResultArea from "@/components/areas/result";
 import { type User } from "@supabase/supabase-js";
-import { obtenerResultadoCuestionarioPorEmail } from "@/lib/data";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 
