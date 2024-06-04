@@ -1,7 +1,7 @@
 export type Facultad = {
   id: string;
   facultad: string;
-  sitioWeb: string;
+  sitioweb: string;
   direccion: string;
   area: string;
   ubicacion: string;

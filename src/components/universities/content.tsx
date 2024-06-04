@@ -39,8 +39,8 @@ export default function ContentUniversities({ universidades }: { universidades: 
             facultad={facultad.facultad}
             programa={facultad.programa}
             ubicacion={facultad.ubicacion}
+            sitioWeb={facultad.sitioweb}
             direccion={facultad.direccion}
-            sitioWeb={facultad.sitioWeb}
           />
         ))
       }
