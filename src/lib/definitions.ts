@@ -1,11 +1,11 @@
 export type Facultad = {
   id: string;
   facultad: string;
-  sitioweb: string;
-  direccion: string;
-  area: string;
-  ubicacion: string;
   programa: string;
+  area: string;
+  direccion: string;
+  ubicacion: string;
+  sitioweb: string;
 };
 
 export type Preparatoria = {

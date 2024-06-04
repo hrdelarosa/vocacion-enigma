@@ -50,6 +50,8 @@ export default async function Result({ user }: { user: User | null }) {
     console.error('Error al obtener el resultado del cuestionario:', error);
     return null;
   }
+
+  console.log(resultado)
   
   return (
     <ResultArea user={user} result={resultado} />
