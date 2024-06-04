@@ -117,7 +117,7 @@ export default async function ResultArea({
                 <CardUniversities 
                   key={i}
                   facultad={unis.facultad}
-                  sitioWeb={unis.sitioWeb}
+                  sitioWeb={unis.sitioweb}
                   direccion={unis.direccion}
                   ubicacion={unis.ubicacion}
                   programa={unis.programa}
