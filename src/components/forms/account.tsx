@@ -126,7 +126,7 @@ export default function AccountForm({ user }: { user: Usuario }) {
                 className="flex items-center gap-1 bg-[#042842] text-[#d9eef4] border-[1px] border-[#d9eef4] cursor-pointer py-2 px-8 text-base font-medium transition duration-300 ease-linear hover:bg-[#d9eef4] hover:text-[#054a71] hover:border-[#054a71] shadow-2xl"
                 type="submit"
               >
-                Sign out
+                Cerrar Sesión
               </button>
             </form>
           </div>
