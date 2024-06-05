@@ -111,7 +111,7 @@ export default function StartTestContent() {
   const [preguntaActual, setPreguntaActual] = useState(0);
   const [textoBoton, setTextoBoton] = useState("Siguiente");
   const [resultado, setResultado] = useState<number[]>([]);
-  const [botonesDeshabilitados, setBotonesDeshabilitados] = useState(false);
+  // const [botonesDeshabilitados, setBotonesDeshabilitados] = useState(false);
   const router = useRouter();
 
   const totalPregun = Object.keys(preguntas).length;
@@ -169,9 +169,9 @@ export default function StartTestContent() {
       if (valorSeleccionado.checked === true) valorSeleccionado.checked = false;
 
       // Deshabilitar botones si es la última pregunta
-      if (preguntaActual === totalPregun - 1) {
-        setBotonesDeshabilitados(true);
-      }
+      // if (preguntaActual === totalPregun - 1) {
+      //   setBotonesDeshabilitados(true);
+      // }
     }
   }
 
@@ -192,11 +192,12 @@ export default function StartTestContent() {
           if (preguntaActual === totalPregun - 2) setTextoBoton("Terminar");
           else setTextoBoton("Siguiente");
         } else if (preguntaActual === totalPregun - 1) {
+          window.localStorage.removeItem("repuestasUser");
+          window.localStorage.removeItem("preguntaActual");
+          
           const result = await insertPruebaFunction(resultado);
           console.log(result);
 
-          window.localStorage.removeItem("repuestasUser");
-          window.localStorage.removeItem("preguntaActual");
           router.push("/test/finished");
         }
       } else {
@@ -208,11 +209,12 @@ export default function StartTestContent() {
           if (preguntaActual === totalPregun - 2) setTextoBoton("Terminar");
           else setTextoBoton("Siguiente");
         } else if (preguntaActual === totalPregun - 1) {
+          window.localStorage.removeItem("repuestasUser");
+          window.localStorage.removeItem("preguntaActual");
+
           const result = await insertPruebaFunction(resultado);
           console.log(result);
 
-          window.localStorage.removeItem("repuestasUser");
-          window.localStorage.removeItem("preguntaActual");
           router.push("/test/finished");
         }
       }

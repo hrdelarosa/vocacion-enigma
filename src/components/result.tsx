@@ -56,7 +56,7 @@ export default async function Result({ user }: { user: User | null }) {
     return null;
   }
 
-  console.log('Resultado', resultado)
+  // console.log('Resultado', resultado)
   
   return (
     <ResultArea user={user} result={resultado} facultades={facultades} />
