@@ -185,16 +185,19 @@ export default function StartTestContent() {
     else if (valorSeleccionado === null) error?.classList.remove("invisible");
     else if (valorSeleccionado !== null) {
       if (error.className.includes("invisible")) {
-        guardarRespuestas();
         if (preguntaActual < totalPregun - 1) {
           const nuevaPreguntaActual = preguntaActual + 1;
           setPreguntaActual(nuevaPreguntaActual);
+          guardarRespuestas();
+
           if (preguntaActual === totalPregun - 2) setTextoBoton("Terminar");
           else setTextoBoton("Siguiente");
         } else if (preguntaActual === totalPregun - 1) {
+          guardarRespuestas();
+
           window.localStorage.removeItem("repuestasUser");
           window.localStorage.removeItem("preguntaActual");
-          
+
           const result = await insertPruebaFunction(resultado);
           console.log(result);
 
@@ -209,6 +212,8 @@ export default function StartTestContent() {
           if (preguntaActual === totalPregun - 2) setTextoBoton("Terminar");
           else setTextoBoton("Siguiente");
         } else if (preguntaActual === totalPregun - 1) {
+          guardarRespuestas();
+
           window.localStorage.removeItem("repuestasUser");
           window.localStorage.removeItem("preguntaActual");
 

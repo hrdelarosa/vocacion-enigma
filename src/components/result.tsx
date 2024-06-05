@@ -9,7 +9,7 @@ export default async function Result({ user }: { user: User | null }) {
   const { data: facultad } = await supabase.rpc("cacultad_query");
 
   const facultades: Facultad[] = facultad || [];
-  console.log('Facultades', facultad);
+  // console.log('Facultades', facultad);
 
   let resultado: string
   let cuestionario_id

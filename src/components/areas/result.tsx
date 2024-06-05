@@ -15,6 +15,7 @@ export default async function ResultArea({
   facultades: Facultad[]
 }) {
   console.log('Resltado componente', result)
+  console.log(facultades)
   // const supabase = createServerComponentClient({ cookies });
   // const { data: facultad } = await supabase.rpc("cacultad_query");
 
