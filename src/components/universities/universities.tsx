@@ -8,7 +8,7 @@ export default async function Universities() {
     const { data: facultad } = await supabase.rpc('cacultad_query')
 
     const facultades: Facultad[] = facultad || []
-    console.log(facultad)
+    // console.log(facultad)
   
   return <ContentUniversities universidades={facultades} />;
 }
