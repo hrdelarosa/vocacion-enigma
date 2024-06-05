@@ -7,140 +7,20 @@ import { useRouter } from "next/navigation";
 import { insertPruebaFunction } from "@/lib/data";
 
 export default function StartTestContent() {
-  const [preguntaActual, setPreguntaActual] = useState(0);
-  const [textoBoton, setTextoBoton] = useState("Siguiente");
-  const [resultado, setResultado] = useState<number[]>([]);
-  const router = useRouter();
-
-  const totalPregun = Object.keys(preguntas).length;
-
-  useEffect(() => {
-    const preguntaFromStorage = window.localStorage.getItem("preguntaActual");
-    setPreguntaActual(
-      preguntaFromStorage ? parseInt(preguntaFromStorage) + 1 : 0
-    );
-    // console.log(preguntaFromStorage);
-  }, []);
-
-  function guardarRespuestas() {
-    const valorSeleccionado = document.querySelector(
-      'input[name="value-radio"]:checked'
-    ) as HTMLInputElement;
-
-    if (valorSeleccionado !== null) {
-      const nuevaRespuesta = parseInt(valorSeleccionado.value);
-
-      const respuestasGuardadas = JSON.parse(
-        window.localStorage.getItem("repuestasUser") || "[]"
-      );
-      respuestasGuardadas.push(nuevaRespuesta);
-      setResultado(respuestasGuardadas);
-
-      window.localStorage.setItem(
-        "repuestasUser",
-        JSON.stringify(respuestasGuardadas)
-      );
-
-      console.log('result', respuestasGuardadas);
-      console.log('result', typeof window.localStorage.getItem('repuestasUser'));
-      console.log('respuesta de usuario', window.localStorage.getItem("repuestasUser"));
-
-      if (valorSeleccionado.checked === true) valorSeleccionado.checked = false;
-    }
-  }
-
-  async function siguientePregunta(event: React.MouseEvent<HTMLButtonElement>) {
-    event.preventDefault();
-    const valorSeleccionado = document.querySelector(
-      'input[name="value-radio"]:checked'
-    );
-    const error = document.querySelector(".error");
-    if (!error) return;
-    else if (valorSeleccionado === null) error?.classList.remove("invisible");
-    else if (valorSeleccionado !== null) {
-      if (error.className.includes("invisible")) {
-        if (preguntaActual < totalPregun - 1) {
-          setPreguntaActual(preguntaActual + 1);
-          guardarRespuestas();
-
-          if (preguntaActual === totalPregun - 2) setTextoBoton("Terminar");
-          else setTextoBoton("Siguiente");
-        } else if (preguntaActual === totalPregun - 1) {
-          guardarRespuestas();
-          const result = await insertPruebaFunction(resultado);
-          console.log(result);
-
-          window.localStorage.removeItem("repuestasUser");
-          window.localStorage.removeItem("preguntaActual");
-          router.push("/test/finished");
-        }
-      } else {
-        if (preguntaActual < totalPregun - 1) {
-          setPreguntaActual(preguntaActual + 1);
-          guardarRespuestas();
-          error.classList.add("invisible");
-
-          if (preguntaActual === totalPregun - 2) setTextoBoton("Terminar");
-          else setTextoBoton("Siguiente");
-        } else if (preguntaActual === totalPregun - 1) {
-          guardarRespuestas();
-          const result = await insertPruebaFunction(resultado);
-          console.log(result);
-          
-          window.localStorage.removeItem("repuestasUser");
-          window.localStorage.removeItem("preguntaActual");
-          router.push("/test/finished");
-        }
-      }
-
-      window.localStorage.setItem("preguntaActual", preguntaActual.toString());
-    }
-  }
-
-  function remo() {
-    window.localStorage.removeItem("repuestasUser");
-    window.localStorage.removeItem("preguntaActual");
-  }
-
-
   // const [preguntaActual, setPreguntaActual] = useState(0);
   // const [textoBoton, setTextoBoton] = useState("Siguiente");
   // const [resultado, setResultado] = useState<number[]>([]);
-  // const [botonesDeshabilitados, setBotonesDeshabilitados] = useState(false);
   // const router = useRouter();
 
   // const totalPregun = Object.keys(preguntas).length;
 
   // useEffect(() => {
   //   const preguntaFromStorage = window.localStorage.getItem("preguntaActual");
-  //   const respuestasFromStorage = window.localStorage.getItem("repuestasUser");
-  //   const respuestas = respuestasFromStorage ? JSON.parse(respuestasFromStorage) : [];
-  //   const preguntaIndex = preguntaFromStorage ? parseInt(preguntaFromStorage) : 0;
-  //   setPreguntaActual(preguntaIndex);
-  //   setResultado(respuestas);
-
-  //   // Marcar la respuesta previamente seleccionada
-  //   if (respuestas[preguntaIndex] !== undefined) {
-  //     const valorSeleccionado = document.querySelector(
-  //       `input[name="value-radio"][value="${respuestas[preguntaIndex]}"]`
-  //     ) as HTMLInputElement;
-  //     if (valorSeleccionado) {
-  //       valorSeleccionado.checked = true;
-  //     }
-  //   }
+  //   setPreguntaActual(
+  //     preguntaFromStorage ? parseInt(preguntaFromStorage) + 1 : 0
+  //   );
+  //   // console.log(preguntaFromStorage);
   // }, []);
-
-  // useEffect(() => {
-  //   // Marcar la respuesta seleccionada cada vez que cambia la pregunta actual
-  //   if (resultado[preguntaActual] !== undefined) {
-  //     const valorSeleccionado = document.querySelector(
-  //       `input[name="value-radio"][value="${resultado[preguntaActual]}"]`
-  //     ) as HTMLInputElement;
-  //     if (valorSeleccionado) {
-  //       valorSeleccionado.checked = true;
-  //     }
-  //   }
-  // }, [preguntaActual, resultado]);
 
   // function guardarRespuestas() {
   //   const valorSeleccionado = document.querySelector(
@@ -153,7 +33,7 @@ export default function StartTestContent() {
   //     const respuestasGuardadas = JSON.parse(
   //       window.localStorage.getItem("repuestasUser") || "[]"
   //     );
-  //     respuestasGuardadas[preguntaActual] = nuevaRespuesta;
+  //     respuestasGuardadas.push(nuevaRespuesta);
   //     setResultado(respuestasGuardadas);
 
   //     window.localStorage.setItem(
@@ -161,12 +41,11 @@ export default function StartTestContent() {
   //       JSON.stringify(respuestasGuardadas)
   //     );
 
-  //     if (valorSeleccionado.checked === true) valorSeleccionado.checked = false;
+  //     console.log('result', respuestasGuardadas);
+  //     console.log('result', typeof window.localStorage.getItem('repuestasUser'));
+  //     console.log('respuesta de usuario', window.localStorage.getItem("repuestasUser"));
 
-  //     // Deshabilitar botones si es la última pregunta
-  //     if (preguntaActual === totalPregun - 1) {
-  //       setBotonesDeshabilitados(true);
-  //     }
+  //     if (valorSeleccionado.checked === true) valorSeleccionado.checked = false;
   //   }
   // }
 
@@ -180,34 +59,40 @@ export default function StartTestContent() {
   //   else if (valorSeleccionado === null) error?.classList.remove("invisible");
   //   else if (valorSeleccionado !== null) {
   //     if (error.className.includes("invisible")) {
-  //       guardarRespuestas();
   //       if (preguntaActual < totalPregun - 1) {
-  //         const nuevaPreguntaActual = preguntaActual + 1;
-  //         setPreguntaActual(nuevaPreguntaActual);
+  //         setPreguntaActual(preguntaActual + 1);
+  //         guardarRespuestas();
+
   //         if (preguntaActual === totalPregun - 2) setTextoBoton("Terminar");
   //         else setTextoBoton("Siguiente");
   //       } else if (preguntaActual === totalPregun - 1) {
-  //         const result = await insertPruebaFunction(resultado);
-  //         console.log(result);
+  //         guardarRespuestas();
 
   //         window.localStorage.removeItem("repuestasUser");
   //         window.localStorage.removeItem("preguntaActual");
+          
+  //         const result = await insertPruebaFunction(resultado);
+  //         console.log(result);
+
   //         router.push("/test/finished");
   //       }
   //     } else {
   //       if (preguntaActual < totalPregun - 1) {
-  //         const nuevaPreguntaActual = preguntaActual + 1;
-  //         setPreguntaActual(nuevaPreguntaActual);
+  //         setPreguntaActual(preguntaActual + 1);
+  //         guardarRespuestas();
   //         error.classList.add("invisible");
 
   //         if (preguntaActual === totalPregun - 2) setTextoBoton("Terminar");
   //         else setTextoBoton("Siguiente");
   //       } else if (preguntaActual === totalPregun - 1) {
-  //         const result = await insertPruebaFunction(resultado);
-  //         console.log(result);
+  //         guardarRespuestas();
 
   //         window.localStorage.removeItem("repuestasUser");
   //         window.localStorage.removeItem("preguntaActual");
+
+  //         const result = await insertPruebaFunction(resultado);
+  //         console.log(result);
+          
   //         router.push("/test/finished");
   //       }
   //     }
@@ -216,22 +101,142 @@ export default function StartTestContent() {
   //   }
   // }
 
-  // function preguntaAnterior(event: React.MouseEvent<HTMLButtonElement>) {
-  //   event.preventDefault();
-  //   if (preguntaActual > 0) {
-  //     const nuevaPreguntaActual = preguntaActual - 1;
-  //     setPreguntaActual(nuevaPreguntaActual);
-  //     setTextoBoton("Siguiente");
-  //     const error = document.querySelector(".error");
-  //     if (error) error.classList.add("invisible");
-  //     window.localStorage.setItem("preguntaActual", nuevaPreguntaActual.toString());
-  //   }
-  // }
-
   // function remo() {
   //   window.localStorage.removeItem("repuestasUser");
   //   window.localStorage.removeItem("preguntaActual");
   // }
+
+
+  
+  const [preguntaActual, setPreguntaActual] = useState(0);
+  const [textoBoton, setTextoBoton] = useState("Siguiente");
+  const [resultado, setResultado] = useState<number[]>([]);
+  const [botonesDeshabilitados, setBotonesDeshabilitados] = useState(false);
+  const router = useRouter();
+
+  const totalPregun = Object.keys(preguntas).length;
+
+  useEffect(() => {
+    const preguntaFromStorage = window.localStorage.getItem("preguntaActual");
+    const respuestasFromStorage = window.localStorage.getItem("repuestasUser");
+    const respuestas = respuestasFromStorage ? JSON.parse(respuestasFromStorage) : [];
+    const preguntaIndex = preguntaFromStorage ? parseInt(preguntaFromStorage) : 0;
+    setPreguntaActual(preguntaIndex);
+    setResultado(respuestas);
+
+    // Marcar la respuesta previamente seleccionada
+    if (respuestas[preguntaIndex] !== undefined) {
+      const valorSeleccionado = document.querySelector(
+        `input[name="value-radio"][value="${respuestas[preguntaIndex]}"]`
+      ) as HTMLInputElement;
+      if (valorSeleccionado) {
+        valorSeleccionado.checked = true;
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    // Marcar la respuesta seleccionada cada vez que cambia la pregunta actual
+    if (resultado[preguntaActual] !== undefined) {
+      const valorSeleccionado = document.querySelector(
+        `input[name="value-radio"][value="${resultado[preguntaActual]}"]`
+      ) as HTMLInputElement;
+      if (valorSeleccionado) {
+        valorSeleccionado.checked = true;
+      }
+    }
+  }, [preguntaActual, resultado]);
+
+  function guardarRespuestas() {
+    const valorSeleccionado = document.querySelector(
+      'input[name="value-radio"]:checked'
+    ) as HTMLInputElement;
+
+    if (valorSeleccionado !== null) {
+      const nuevaRespuesta = parseInt(valorSeleccionado.value);
+
+      const respuestasGuardadas = JSON.parse(
+        window.localStorage.getItem("repuestasUser") || "[]"
+      );
+      respuestasGuardadas[preguntaActual] = nuevaRespuesta;
+      setResultado(respuestasGuardadas);
+
+      window.localStorage.setItem(
+        "repuestasUser",
+        JSON.stringify(respuestasGuardadas)
+      );
+
+      if (valorSeleccionado.checked === true) valorSeleccionado.checked = false;
+
+      // Deshabilitar botones si es la última pregunta
+      if (preguntaActual === totalPregun - 1) {
+        setBotonesDeshabilitados(true);
+      }
+    }
+  }
+
+  async function siguientePregunta(event: React.MouseEvent<HTMLButtonElement>) {
+    event.preventDefault();
+    const valorSeleccionado = document.querySelector(
+      'input[name="value-radio"]:checked'
+    );
+    const error = document.querySelector(".error");
+    if (!error) return;
+    else if (valorSeleccionado === null) error?.classList.remove("invisible");
+    else if (valorSeleccionado !== null) {
+      if (error.className.includes("invisible")) {
+        guardarRespuestas();
+        if (preguntaActual < totalPregun - 1) {
+          const nuevaPreguntaActual = preguntaActual + 1;
+          setPreguntaActual(nuevaPreguntaActual);
+          if (preguntaActual === totalPregun - 2) setTextoBoton("Terminar");
+          else setTextoBoton("Siguiente");
+        } else if (preguntaActual === totalPregun - 1) {
+          const result = await insertPruebaFunction(resultado);
+          console.log(result);
+
+          window.localStorage.removeItem("repuestasUser");
+          window.localStorage.removeItem("preguntaActual");
+          router.push("/test/finished");
+        }
+      } else {
+        if (preguntaActual < totalPregun - 1) {
+          const nuevaPreguntaActual = preguntaActual + 1;
+          setPreguntaActual(nuevaPreguntaActual);
+          error.classList.add("invisible");
+
+          if (preguntaActual === totalPregun - 2) setTextoBoton("Terminar");
+          else setTextoBoton("Siguiente");
+        } else if (preguntaActual === totalPregun - 1) {
+          const result = await insertPruebaFunction(resultado);
+          console.log(result);
+
+          window.localStorage.removeItem("repuestasUser");
+          window.localStorage.removeItem("preguntaActual");
+          router.push("/test/finished");
+        }
+      }
+
+      window.localStorage.setItem("preguntaActual", preguntaActual.toString());
+    }
+  }
+
+  function preguntaAnterior(event: React.MouseEvent<HTMLButtonElement>) {
+    event.preventDefault();
+    if (preguntaActual > 0) {
+      const nuevaPreguntaActual = preguntaActual - 1;
+      setPreguntaActual(nuevaPreguntaActual);
+      setTextoBoton("Siguiente");
+      const error = document.querySelector(".error");
+      if (error) error.classList.add("invisible");
+      window.localStorage.setItem("preguntaActual", nuevaPreguntaActual.toString());
+    }
+  }
+
+  function remo() {
+    window.localStorage.removeItem("repuestasUser");
+    window.localStorage.removeItem("preguntaActual");
+  }
 
   return (
     <main className="flex items-center h-[89vh]">

@@ -2,9 +2,14 @@ import ResultArea from "@/components/areas/result";
 import { type User } from "@supabase/supabase-js";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
+import { Facultad } from "@/lib/definitions";
 
 export default async function Result({ user }: { user: User | null }) {  
   const supabase = createServerComponentClient({ cookies });
+  const { data: facultad } = await supabase.rpc("cacultad_query");
+
+  const facultades: Facultad[] = facultad || [];
+  console.log('Facultades', facultad);
 
   let resultado: string
   let cuestionario_id
@@ -51,9 +56,9 @@ export default async function Result({ user }: { user: User | null }) {
     return null;
   }
 
-  console.log(resultado)
+  console.log('Resultado', resultado)
   
   return (
-    <ResultArea user={user} result={resultado} />
+    <ResultArea user={user} result={resultado} facultades={facultades} />
   );
 }

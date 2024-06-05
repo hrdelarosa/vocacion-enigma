@@ -8,20 +8,22 @@ import { Facultad } from "@/lib/definitions";
 export default async function ResultArea({
   user,
   result,
+  facultades
 }: {
   user: User | null;
   result: string;
+  facultades: Facultad[]
 }) {
-  console.log(result)
-  const supabase = createServerComponentClient({ cookies });
-  const { data: facultad } = await supabase.rpc("cacultad_query");
+  console.log('Resltado componente', result)
+  // const supabase = createServerComponentClient({ cookies });
+  // const { data: facultad } = await supabase.rpc("cacultad_query");
 
-  const facultades: Facultad[] = facultad || [];
-  console.log(facultad);
+  // const facultades: Facultad[] = facultad || [];
+  // console.log('Facultades', facultad);
   const filtradas = facultades.filter(
     (universidad) => universidad.area === result
   );
-  console.log(filtradas)
+  console.log('Facultades filtradas', filtradas)
 
   return (
     <main className="mx-5 items-center py-8 sm:py-14 sm:mx-auto sm:max-w-7xl">
