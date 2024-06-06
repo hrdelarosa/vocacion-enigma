@@ -1,30 +1,29 @@
 import { areas } from "@/const/area-description";
 import CardUniversities from "../cards/universities";
-import { type User } from "@supabase/supabase-js";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
 import { Facultad } from "@/lib/definitions";
 
 export default async function ResultArea({
-  user,
   result,
   facultades
 }: {
-  user: User | null;
   result: string;
   facultades: Facultad[]
 }) {
-  console.log('Resltado componente', result)
-  console.log(facultades)
+  console.log('Resultado componente', result)
+  const resultArea = result
+  console.log('Resultado Area', resultArea)
+  const area = areas[resultArea]
+  console.log(area)
+
   // const supabase = createServerComponentClient({ cookies });
   // const { data: facultad } = await supabase.rpc("cacultad_query");
 
   // const facultades: Facultad[] = facultad || [];
   // console.log('Facultades', facultad);
-  const filtradas = facultades.filter(
+  const facultadesFiltradas: Facultad[] = facultades.filter(
     (universidad) => universidad.area === result
   );
-  console.log('Facultades filtradas', filtradas)
+  console.log('Facultades filtradas', facultades)
 
   return (
     <main className="mx-5 items-center py-8 sm:py-14 sm:mx-auto sm:max-w-7xl">
@@ -47,7 +46,7 @@ export default async function ResultArea({
         <h2 className="text-xl font-semibold text-zinc-700 sm:text-2xl">
           {result}
         </h2>
-        <p className="text-base mt-0 sm:text-lg sm:mt-1">{areas[result]}</p>
+        <p className="text-base mt-0 sm:text-lg sm:mt-1">{area}</p>
       </div>
       <h1 className="text-lg font-bold mt-4 text-center text-zinc-600 sm:text-xl sm:text-left sm:mt-7">
         Universidades del Area.
@@ -65,7 +64,7 @@ export default async function ResultArea({
         </>
       ) : (
         <section className="grid grid-cols-1 sm:grid-cols-3 justify-center sm:gap-x-14 gap-y-4 sm:gap-y-6 pt-4 sm:pt-8">
-          {filtradas.map((unis, i) => (
+          {facultadesFiltradas.map((unis, i) => (
             <CardUniversities
               key={i}
               facultad={unis.facultad}
