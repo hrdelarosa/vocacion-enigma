@@ -195,10 +195,10 @@ export default function StartTestContent() {
         } else if (preguntaActual === totalPregun - 1) {
           guardarRespuestas();
 
+          const result = await insertPruebaFunction(resultado);
+          
           window.localStorage.removeItem("repuestasUser");
           window.localStorage.removeItem("preguntaActual");
-
-          const result = await insertPruebaFunction(resultado);
           console.log(result);
 
           router.push("/test/finished");
@@ -214,10 +214,10 @@ export default function StartTestContent() {
         } else if (preguntaActual === totalPregun - 1) {
           guardarRespuestas();
 
+          const result = await insertPruebaFunction(resultado);
+          
           window.localStorage.removeItem("repuestasUser");
           window.localStorage.removeItem("preguntaActual");
-
-          const result = await insertPruebaFunction(resultado);
           console.log(result);
 
           router.push("/test/finished");
@@ -287,14 +287,13 @@ export default function StartTestContent() {
                 </p>
               </div>
             </div>
-            {/* <div className="flex flex-row gap-10">
+            <div className="flex flex-row gap-10">
               <button
                 onClick={preguntaAnterior}
                 className={`${preguntaActual === 0 && 'hidden'} block bg-blue-900 hover:bg-blue-800 text-white border-blue-900 border-2 font-medium transition-all ease-in-out duration-300 rounded-lg text-base px-5 py-2 md:px-8 md:py-2.5 cursor-pointer`}
-                disabled={botonesDeshabilitados}
                 >
                 Anterior
-              </button> */}
+              </button>
               <button
                 onClick={siguientePregunta}
                 className="bg-blue-950 hover:bg-blue-900 text-white border-blue-950 border-2 font-medium transition-all ease-in-out duration-300 rounded-lg text-base px-5 py-2 md:px-8 md:py-2.5 cursor-pointer"
@@ -302,7 +301,7 @@ export default function StartTestContent() {
                 >
                 {textoBoton}
               </button>
-            {/* </div> */}
+            </div>
           </div>
         </form>
         <span className="flex justify-center mt-5 text-xs text-gray-500 sm:mt-6 sm:text-sm">
