@@ -1,0 +1,96 @@
+@import 'tailwindcss';
+@plugin "@midudev/tailwind-animations";
+@plugin "@tailwindcss/typography";
+@custom-variant dark (&:where(.dark, .dark *));
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(1.5rem + 3.5rem);
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../assets/fonts/inter.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 100 700;
+  font-display: swap;
+}
+
+@theme {
+  /*Fonts*/
+  --font-display: 'Inter', system-ui, sans-serif;
+  /* Colors */
+  --color-sail-50: #f0f8ff;
+  --color-sail-100: #dff0ff;
+  --color-sail-200: #b8e4ff;
+  --color-sail-300: #79cdff;
+  --color-sail-400: #32b5fe;
+  --color-sail-500: #079cf0;
+  --color-sail-600: #007ccd;
+  --color-sail-700: #0062a6;
+  --color-sail-800: #035389;
+  --color-sail-900: #094671;
+  --color-sail-950: #062c4b;
+  /* Dark Theme Colors */
+  --color-primary-dark: #1a1a1c;
+  --color-secondary-dark: #3b3c3f;
+  --color-electric-lime-50: #fcffe5;
+  --color-electric-lime-100: #f6ffc7;
+  --color-electric-lime-200: #ebff95;
+  --color-electric-lime-300: #dbff5e;
+  --color-electric-lime-400: #c5f625;
+  --color-electric-lime-500: #a6dd05;
+  --color-electric-lime-600: #80b100;
+  --color-electric-lime-700: #608605;
+  --color-electric-lime-800: #4d690b;
+  --color-electric-lime-900: #41590e;
+  /* Light Theme Colors */
+  --color-primary-light: #f5f6f8;
+  --color-secondary-light: #eceef2;
+  --color-woodsmoke-950: #1d1d1d;
+  --color-woodsmoke-900: #3d3d3d;
+  --color-woodsmoke-800: #454545;
+  --color-woodsmoke-700: #4f4f4f;
+  --color-woodsmoke-600: #5d5d5d;
+  --color-woodsmoke-500: #6d6d6d;
+  --color-woodsmoke-400: #888888;
+  --color-woodsmoke-300: #b0b0b0;
+  --color-woodsmoke-200: #d1d1d1;
+  --color-woodsmoke-100: #e7e7e7;
+  --color-woodsmoke-50: #f7f7f7;
+  /* Skeleton Colors */
+  --color-skeleton-light: #ebebeb;
+  --color-skeleton-dark: #404040;
+  /* Check Colors */
+  --color-check-border: #a2a1a833;
+  --color-check-light: #e8e8e8;
+  --color-check-dark: #212121;
+}
+
+.transition-bg {
+  transition: background-color 200ms ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tab-content {
+  position: relative;
+}
+
+[role='tabpanel'] {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+[role='tabpanel'].hidden {
+  display: none;
+  animation: none;
+}
