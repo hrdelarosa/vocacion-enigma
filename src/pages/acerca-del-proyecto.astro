@@ -1,0 +1,175 @@
+---
+import { Image } from 'astro:assets'
+import Layout from '../layouts/Layout.astro'
+import ContainerPage from '../components/common/ContainerPage.astro'
+import SectionInfo from '../components/sections/SectionInfo.astro'
+import CardInfo from '../components/cards/CardInfo.astro'
+import Target from '../assets/icons/target.svg'
+import CircleCheck from '../assets/icons/circle-check.svg'
+import ListInfo from '../components/features/about/ListInfo.astro'
+import ListItem from '../components/UI/ListItem.astro'
+
+export const prerender = true
+---
+
+<Layout
+  title="Acerca del Proyecto"
+  description="Información sobre el proyecto Vocación Enigma"
+>
+  <ContainerPage
+    title="Acerca del Proyecto"
+    description="Conoce más sobre nuestra iniciativa de orientación vocacional, desarrollado para la Universidad Autónoma de Guerrero para apoyar a los estudiantes en la elección de su futuro profesional"
+  >
+    <SectionInfo title="¿Qué es este proyecto?">
+      <p>
+        Este sitio web es una herramienta de orientación vocacional creada como
+        parte de un proyecto escolar. Nuestro objetivo es ayudar a estudiantes
+        como tú a identificar su perfil y explorar posibles carreras a través de
+        un test interactivo.
+      </p>
+      <p>
+        Este proyecto fue desarrollado en la materia de
+        <strong> Programación Web </strong> de la <strong>
+          Facultad de Ciencias y Tecnologías de la Información
+        </strong>, combinando el aprendizaje técnico con un propósito social:
+        ofrecer una guía gratuita y accesible para jóvenes que están tomando una
+        de las decisiones más importantes de su futuro profesional.
+      </p>
+    </SectionInfo>
+
+    <SectionInfo
+      title="Nuestra Misión"
+      description="El proyecto de Orientación Vocacional de la Universidad Autónoma de Guerrero (UAGro) nace con la misión de proporcionar a los estudiantes de bachillerato y a quienes buscan reorientar su carrera profesional, una herramienta confiable y científicamente validada que les ayude a identificar sus intereses, aptitudes y habilidades para tomar decisiones informadas sobre su futuro académico y profesional."
+    />
+
+    <SectionInfo title="Objetivos del Proyecto">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <CardInfo
+          title="Orientación efectiva"
+          description="Proporcionar una guía clara para la elección de carrera"
+          text="Ayudar a los estudiantes a identificar sus intereses y aptitudes para elegir una carrera universitaria que se alinee con su perfil personal."
+        >
+          <Target
+            width={26}
+            height={26}
+            slot="icon"
+            class="text-sail-800 dark:text-sail-200"
+          />
+        </CardInfo>
+
+        <CardInfo
+          title="Reducir la deserción"
+          description="Disminuir el abandono escolar por elecciones incorrectas"
+          text="Contribuir a la reducción de la deserción escolar causada por una elección inadecuada de carrera, aumentando la satisfacción y el rendimiento académico."
+        >
+          <CircleCheck
+            width={26}
+            height={26}
+            slot="icon"
+            class="text-sail-800 dark:text-sail-200"
+          />
+        </CardInfo>
+      </div>
+    </SectionInfo>
+
+    <SectionInfo title="Historia del Proyecto">
+      <p>
+        La idea nació como parte de una asignatura escolar, al detectar una
+        necesidad común entre jóvenes: <strong
+          >no saber qué estudiar al terminar la preparatoria</strong
+        >. A partir de esa problemática, se propuso la creación de un sitio web
+        que no solo aplicara una prueba, sino que también orientara con
+        información útil, moderna y basada en instituciones reales.
+      </p>
+      <p>
+        A lo largo del semestre, el equipo trabajó en el diseño, desarrollo,
+        validación del test y recopilación de datos de universidades. Este
+        proyecto representa un esfuerzo conjunto entre docentes y estudiantes
+        comprometidos con el futuro académico de la comunidad.
+      </p>
+    </SectionInfo>
+
+    <div
+      class="bg-woodsmoke-100/45 dark:bg-woodsmoke-900/25 p-5 lg:p-10 rounded-lg space-y-2.5"
+    >
+      <h2 class="text-xl lg:text-2xl font-bold text-center">
+        Beneficios del Proyecto
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-4">
+        <ListInfo title="Para los estudiantes">
+          <ListItem>
+            <strong>Autoconocimiento:</strong> ayuda a identificar intereses y áreas
+            de afinidad.
+          </ListItem>
+          <ListItem>
+            <strong>Orientación clara:</strong> reduce la duda al elegir una carrera.
+          </ListItem>
+          <ListItem>
+            <strong>Accesibilidad:</strong> es gratuito y disponible en línea para
+            todos.
+          </ListItem>
+        </ListInfo>
+
+        <ListInfo title="Para el equipo desarrollador">
+          <ListItem>
+            <strong>Aprendizaje práctico:</strong> aplica conocimientos de desarrollo
+            weliy diseño.
+          </ListItem>
+          <ListItem>
+            <strong>Trabajo en equipo:</strong> fortalece la colaboración y la organización.
+          </ListItem>
+          <ListItem>
+            <strong>Impacto real:</strong> motiva al saber que ayuda a otros jóvenes.
+          </ListItem>
+        </ListInfo>
+
+        <ListInfo title="Para la institución">
+          <ListItem>
+            <strong>Proyección académica:</strong> muestra su compromiso con laliducación.
+          </ListItem>
+          <ListItem>
+            <strong>Vínculo social:</strong> conecta con estudiantes de nivel medio
+            superior.
+          </ListItem>
+        </ListInfo>
+
+        <ListInfo title="Para la comunidad educativa">
+          <ListItem>
+            <strong>Herramienta de apoyo:</strong> útil para orientadores y docentes.
+          </ListItem>
+          <ListItem>
+            <strong>Modelo replicable:</strong> puede inspirar proyectos similares
+            en otras escuelas.
+          </ListItem>
+        </ListInfo>
+      </div>
+    </div>
+
+    <SectionInfo title="Impacto y Resultados">
+      <div class="flex flex-col gap-5">
+        <p>
+          Desde su implementación, el proyecto ha beneficiado a miles de
+          estudiantes en el estado de Guerrero, proporcionándoles una
+          orientación clara para su elección profesional. Los resultados
+          muestran una mayor satisfacción con la elección de carrera y una
+          reducción en los índices de deserción escolar en los primeros
+          semestres universitarios.
+        </p>
+        <p>
+          La UAGro continúa trabajando en la mejora continua de esta
+          herramienta, incorporando nuevas tecnologías y actualizando la
+          información sobre las carreras y el mercado laboral para ofrecer una
+          orientación cada vez más precisa y útil.
+        </p>
+        <Image
+          src="/students.webp"
+          alt="Estudiantes en el aula enfrente del pizarrón"
+          width={690}
+          height={690}
+          class="mx-auto rounded-lg mt-6"
+        />
+      </div>
+    </SectionInfo>
+  </ContainerPage>
+</Layout>

@@ -1,0 +1,239 @@
+---
+import { Image } from 'astro:assets'
+import Layout from '../layouts/Layout.astro'
+import ContainerPage from '../components/common/ContainerPage.astro'
+import SectionInfo from '../components/sections/SectionInfo.astro'
+import CardInfo from '../components/cards/CardInfo.astro'
+import BookOpen from '../assets/icons/book-open.svg'
+import Graduation from '../assets/icons/graduation.svg'
+import ListItem from '../components/UI/ListItem.astro'
+import CardStats from '../components/cards/CardStats.astro'
+import School from '../assets/icons/school.svg'
+import Students from '../assets/icons/study-areas/humanistic.svg'
+import BannerSection from '../components/sections/BannerSection.astro'
+import CardInfoSecondary from '../components/cards/CardInfoSecondary.astro'
+import Globe from '../assets/icons/globe.svg'
+import Facebook from '../assets/icons/socials/facebook.svg'
+import Instagram from '../assets/icons/socials/instagram.svg'
+import X from '../assets/icons/socials/X.svg'
+import { footerOptions } from '../constants/footer-options'
+
+export const prerender = true
+---
+
+<Layout
+  title="UAGro"
+  description="Descubre tu camino profesional con la prueba de orientación vocacional de la UAGro"
+>
+  <ContainerPage
+    title="UAGro"
+    description="Conoce más sobre la Universidad Autónoma de Guerrero y su papel en este proyecto"
+  >
+    <Image
+      src="/rectoryUAGro.webp"
+      alt="UAGro"
+      width={690}
+      height={690}
+      class="mx-auto rounded-lg"
+      slot="image"
+    />
+    <SectionInfo title="Historia de la Universidad">
+      <p>
+        La Universidad Autónoma de Guerrero (UAGro) fue fundada el 30 de marzo
+        de 1960, cuando el Colegio del Estado se transformó en la Universidad de
+        Guerrero. En 1963 obtuvo su autonomía, convirtiéndose en la Universidad
+        Autónoma de Guerrero.
+      </p>
+      <p>
+        A lo largo de más de seis décadas, la UAGro ha sido un pilar fundamental
+        en el desarrollo educativo, cultural y social del estado de Guerrero,
+        formando a profesionales comprometidos con el desarrollo de la región y
+        del país.
+      </p>
+    </SectionInfo>
+
+    <SectionInfo title="Misión y Visión">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <CardInfo
+          title="Misión"
+          text="Formar profesionales de manera integral, con excelencia académica, equidad, pertinencia, vinculación y compromiso social, contribuyendo al desarrollo sustentable de Guerrero y de la nación."
+        >
+          <BookOpen
+            width={26}
+            height={26}
+            slot="icon"
+            class="text-sail-800 dark:text-sail-200"
+          />
+        </CardInfo>
+
+        <CardInfo
+          title="Visión"
+          text="Ser una institución de educación superior de calidad, con reconocimiento nacional e internacional, socialmente responsable, incluyente, sustentable y transparente, que contribuya al desarrollo de Guerrero y de México."
+        >
+          <Graduation
+            width={26}
+            height={26}
+            slot="icon"
+            class="text-sail-800 dark:text-sail-200"
+          />
+        </CardInfo>
+      </div>
+    </SectionInfo>
+
+    <SectionInfo title="La UAGro en Cifras">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <CardStats stat="70+" text="Planteles">
+          <School
+            width={32}
+            height={32}
+            slot="icon"
+            class="text-sail-800 dark:text-sail-200"
+          />
+        </CardStats>
+        <CardStats stat="50+" text="Programas académicos">
+          <BookOpen
+            width={32}
+            height={32}
+            slot="icon"
+            class="text-sail-800 dark:text-sail-200"
+          />
+        </CardStats>
+        <CardStats stat="35,000+" text="Estudiantes">
+          <Students
+            width={32}
+            height={32}
+            slot="icon"
+            class="text-sail-800 dark:text-sail-200"
+          />
+        </CardStats>
+        <CardStats stat="6,000+" text="Docentes">
+          <Graduation
+            width={32}
+            height={32}
+            slot="icon"
+            class="text-sail-800 dark:text-sail-200"
+          />
+        </CardStats>
+      </div>
+    </SectionInfo>
+
+    <SectionInfo title="Oferta Educativa">
+      <p>
+        La UAGro ofrece una amplia variedad de programas educativos en
+        diferentes niveles:
+      </p>
+
+      <ul>
+        <ListItem>Bachillerato (Preparatoria)</ListItem>
+        <ListItem>Técnico Superior Universitario</ListItem>
+        <ListItem>Licenciatura</ListItem>
+        <ListItem>Especialidad</ListItem>
+        <ListItem>Maestría</ListItem>
+        <ListItem>Doctorado</ListItem>
+      </ul>
+
+      <p>
+        Estos programas están distribuidos en diversas áreas del conocimiento,
+        abarcando ciencias exactas, naturales, sociales, humanidades, artes,
+        salud, administrativas e ingenierías, entre otras.
+      </p>
+    </SectionInfo>
+
+    <SectionInfo
+      title="Papel de la UAGro en el Proyecto de Orientación Vocacional"
+    >
+      <p>
+        Este proyecto de orientación vocacional fue desarrollado como parte de
+        una asignatura dentro de la
+        <strong>Facultad de Ciencias y Tecnologías de la Información</strong>
+        de la <strong>Universidad Autónoma de Guerrero (UAGro)</strong>.
+      </p>
+      <p>
+        Aunque no es una iniciativa institucional oficial de la universidad ni
+        de su Dirección de Orientación Educativa y Vocacional, sí pretende
+        reflejar el compromiso con la formación integral de los estudiantes, no
+        solo durante su estancia en la universidad, sino desde antes de su
+        ingreso, ayudándoles a tomar decisiones informadas sobre su futuro
+        académico y profesional.
+      </p>
+      <p>
+        A través de esta propuesta académica, se buscó ofrecer una herramienta
+        digital accesible y útil que permita a los estudiantes de nivel medio
+        superior explorar sus intereses vocacionales y tomar decisiones
+        informadas sobre su futuro académico.
+      </p>
+    </SectionInfo>
+
+    <SectionInfo title="Ubicación">
+      <p class="text-woodsmoke-400 dark:text-woodsmoke-300">
+        Lázaro Cárdenas 88, Zona Sin Asignación Denombre de Col 21, 39086
+        Chilpancingo de los Bravo, Gro.
+      </p>
+    </SectionInfo>
+
+    <BannerSection
+      title="Conoce más sobre la UAGro"
+      description="Si estás interesado en formar parte de la comunidad universitaria o deseas más información sobre los programas académicos de la UAGro, te invitamos a visitar su sitio web o redes sociales."
+    >
+      <div
+        class="w-full max-w-sm mx-auto grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-4"
+      >
+        <a
+          href={footerOptions.university.links[1].url}
+          target="_blank"
+          class="group"
+        >
+          <CardInfoSecondary>
+            <Globe
+              width={32}
+              height={32}
+              slot="icon"
+              class="text-black dark:text-white group-hover:scale-110 transition-transform duration-300 ease-in-out"
+            />
+          </CardInfoSecondary>
+        </a>
+
+        <a
+          href="https://www.facebook.com/UAGro.MX.Oficial"
+          target="_blank"
+          class="group"
+        >
+          <CardInfoSecondary>
+            <Facebook
+              width={32}
+              height={32}
+              slot="icon"
+              class="dark:fill-white fill-black group-hover:scale-110 transition-transform duration-300 ease-in-out"
+            />
+          </CardInfoSecondary>
+        </a>
+
+        <a
+          href="https://www.instagram.com/uagro_mx?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+          target="_blank"
+          class="group"
+        >
+          <CardInfoSecondary>
+            <Instagram
+              width={32}
+              height={32}
+              slot="icon"
+              class="dark:fill-white fill-black group-hover:scale-110 transition-transform duration-300 ease-in-out"
+            />
+          </CardInfoSecondary>
+        </a>
+
+        <a href="https://x.com/UAGro_MX" target="_blank" class="group">
+          <CardInfoSecondary>
+            <X
+              width={32}
+              height={32}
+              slot="icon"
+              class="dark:fill-white fill-black group-hover:scale-110 transition-transform duration-300 ease-in-out"
+            />
+          </CardInfoSecondary>
+        </a>
+      </div>
+    </BannerSection>
+  </ContainerPage>
+</Layout>

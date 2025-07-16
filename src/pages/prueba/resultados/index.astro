@@ -1,0 +1,220 @@
+---
+import Layout from '../../../layouts/Layout.astro'
+import ContainerPage from '../../../components/common/ContainerPage.astro'
+import CardResults from '../../../components/cards/CardResults.astro'
+import ListItem from '../../../components/UI/ListItem.astro'
+import Graduation from '../../../assets/icons/graduation.svg'
+import SectionInfo from '../../../components/sections/SectionInfo.astro'
+import BannerSection from '../../../components/sections/BannerSection.astro'
+import Button from '../../../components/UI/buttons/Button.astro'
+import HighlightedArea from '../../../components/features/test/results/HighlightedArea.astro'
+import SecondaryAreasContainer from '../../../components/features/test/results/SecondaryAreasContainer.astro'
+import Skeleton from '../../../components/UI/skeletons/Skeleton.astro'
+
+export const prerender = true
+
+const skeletonsCareers = Array.from({ length: 6 })
+const randomWidth = () => Math.floor(Math.random() * (430 - 110)) + 110
+---
+
+<Layout title="Resultados" description="Resultados de la prueba CHASIDE">
+  <ContainerPage
+    title="Resultados"
+    description="Basado en tus respuestas, estas son las áreas que más se adaptan a tu perfil"
+  >
+    <CardResults
+      title="Tu área destacada"
+      description="Esta es el área que más se adaptó a tus respuestas"
+    >
+      <Graduation
+        width={40}
+        height={40}
+        slot="icon"
+        class="text-sail-800 dark:text-sail-200"
+      />
+
+      <HighlightedArea server:defer>
+        <div slot="fallback" class="space-y-4">
+          <div
+            class="flex flex-col md:flex-row items-start md:items-center justify-between gap-2"
+          >
+            <div class="space-y-1">
+              <Skeleton className="w-52 md:w-72 h-7 rounded-lg" />
+              <Skeleton className="w-xs sm:w-md lg:w-2xl h-6 rounded-lg" />
+            </div>
+
+            <div
+              class="flex flex-col items-start md:items-end w-full max-w-28 space-y-1"
+            >
+              <Skeleton className="w-20 h-6 rounded-lg" />
+              <Skeleton className="w-28 h-5 rounded-lg" />
+              <Skeleton className="w-28 h-2 rounded-full" />
+            </div>
+          </div>
+
+          <div>
+            <Skeleton className="w-44 h-6 rounded-full" />
+
+            <ul class="grid grid-cols-1 md:grid-cols-2 space-y-1 mt-1.5">
+              {
+                skeletonsCareers.map(() => (
+                  <div class="flex items-center gap-2">
+                    <Skeleton className="size-6 rounded-full shrink-0" />
+                    <Skeleton
+                      className="h-6 rounded-lg"
+                      style={`width: ${randomWidth()}px`}
+                    />
+                  </div>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+      </HighlightedArea>
+
+      <div class="space-y-2 mt-2">
+        <div class="flex items-center justify-center md:justify-end">
+          <Button text="Ver Reporte" size="small" id="view-report" />
+        </div>
+
+        <p
+          class="text-center text-sm text-woodsmoke-500 dark:text-woodsmoke-300"
+        >
+          Recuerda que estos resultados son orientativos. Te recomendamos
+          consultar con un orientador vocacional para una asesoría más
+          personalizada.
+        </p>
+      </div>
+    </CardResults>
+
+    <SectionInfo title="Otras áreas con alta afinidad">
+      <SecondaryAreasContainer server:defer>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5" slot="fallback">
+          <Skeleton className="w-full h-40 rounded-lg" />
+          <Skeleton className="w-full h-40 rounded-lg" />
+        </div>
+      </SecondaryAreasContainer>
+    </SectionInfo>
+
+    <BannerSection title="Recomendaciones para ti">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div class="space-y-1">
+          <h3 class="text-lg font-semibold">Próximos pasos:</h3>
+
+          <ul class="space-y-1">
+            <ListItem>Investiga las carreras de tu área principal</ListItem>
+            <ListItem>
+              Visita las universidades que ofrecen estas carreras
+            </ListItem>
+            <ListItem>Consulta con un orientador vocacional</ListItem>
+            <ListItem>Considera tus segundas y terceras opciones</ListItem>
+          </ul>
+        </div>
+
+        <div class="space-y-1">
+          <h3 class="text-lg font-semibold">Consejos importantes:</h3>
+
+          <ul class="space-y-1">
+            <ListItem>
+              Esta prueba es solo orientativa, no es definitiva
+            </ListItem>
+            <ListItem>
+              Considera tambien tus factores económicos y familiares
+            </ListItem>
+            <ListItem>Puedes tener éxito en múltiples áreas</ListItem>
+            <ListItem>
+              Busca asesoría profesional adicional si es necesario
+            </ListItem>
+          </ul>
+        </div>
+      </div>
+    </BannerSection>
+
+    <div
+      class="flex flex-col md:flex-row items-center justify-center gap-4 mt-2.5"
+    >
+      <Button
+        text="Explorar todas las áreas"
+        button="outline"
+        type="link"
+        href="/areas"
+      />
+      <Button text="Repetir Prueba" id="open-dialog" />
+    </div>
+  </ContainerPage>
+
+  <dialog
+    id="my-dialog"
+    class="fixed m-auto max-w-80 md:max-w-lg rounded-lg bg-primary-light p-6 text-primary-dark dark:bg-primary-dark dark:text-primary-light backdrop:backdrop-blur-sm backdrop:bg-black/30"
+  >
+    <h3 class="text-xl font-bold">Repetir Prueba</h3>
+    <p class="mt-2 text-pretty text-base">
+      ¿Estás seguro de que quieres repetir la prueba? Se borrará tu progreso
+      actual.
+    </p>
+
+    <div class="mt-6 flex items-center justify-end gap-4">
+      <form method="dialog" class="flex items-center gap-4">
+        <Button text="Cancelar" button="secondary" />
+        <Button text="Aceptar" button="primary" id="accept" />
+      </form>
+    </div>
+  </dialog>
+</Layout>
+
+<style>
+  dialog {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<script>
+  const dialog = document.getElementById('my-dialog') as HTMLDialogElement
+  const openButton = document.getElementById('open-dialog')
+  const acceptButton = document.getElementById('accept')
+  const viewReportButton = document.getElementById('view-report')
+
+  if (openButton && dialog) {
+    openButton.addEventListener('click', () => {
+      dialog.showModal()
+    })
+
+    if (acceptButton) {
+      acceptButton.addEventListener('click', () => {
+        if (window.localStorage.getItem('responses')) {
+          window.localStorage.removeItem('responses')
+          window.localStorage.removeItem('results')
+          window.localStorage.removeItem('test_id')
+          window.localStorage.removeItem('currentStep')
+          document.cookie =
+            'test_id=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC'
+        }
+
+        window.location.href = '/prueba'
+      })
+    }
+
+    if (viewReportButton) {
+      const id = document.cookie
+        .split(';')
+        .find((cookie) => cookie.startsWith('test_id='))
+        ?.split('=')[1]
+
+      viewReportButton.addEventListener('click', () => {
+        console.log('ver resultados')
+        window.location.href = `/prueba/resultados/${id}`
+      })
+    }
+  }
+</script>

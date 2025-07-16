@@ -1,0 +1,233 @@
+---
+import Layout from '../layouts/Layout.astro'
+import ContainerPage from '../components/common/ContainerPage.astro'
+import SectionInfo from '../components/sections/SectionInfo.astro'
+import CardInfo from '../components/cards/CardInfo.astro'
+import TabTest from '../components/UI/tab/TabTest'
+import ListItem from '../components/UI/ListItem.astro'
+import BannerSection from '../components/sections/BannerSection.astro'
+import Button from '../components/UI/buttons/Button.astro'
+import CircleCheck from '../assets/icons/circle-check.svg'
+import CircleAlert from '../assets/icons/circle-alert.svg'
+import CircleQuestion from '../assets/icons/circle-question.svg'
+import Rocket from '../assets/icons/rocket.svg'
+
+export const prerender = true
+---
+
+<Layout
+  title="Acerca de la Prueba"
+  description="Información sobre la prueba de orientación vocacional de la UAGro"
+>
+  <ContainerPage
+    title="Acerca de la Prueba"
+    description="Conoce más sobre esta herramienta de orientación vocacional"
+  >
+    <SectionInfo title="¿Qué es la prueba CHASIDE?">
+      <p>
+        La prueba CHASIDE es una herramienta de orientación vocacional
+        ampliamente utilizada que te ayuda identificar tus intereses y aptitudes
+        predominantes para la elección de una carrera profesional. Su nombre es
+        un acrónimo formado por las primeras letras de las áreas que evalúa:
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <CardInfo title="Intereses">
+          <ul>
+            <li class="flex items-start sm:items-center gap-2">
+              <span class="font-bold text-sail-800 dark:text-sail-200">C</span>
+              - Administrativas y Contables
+            </li>
+            <li class="flex items-start sm:items-center gap-2">
+              <span class="font-bold text-sail-800 dark:text-sail-200">H</span>
+              - Humanísticas y Sociales
+            </li>
+            <li class="flex items-start sm:items-center gap-2">
+              <span class="font-bold text-sail-800 dark:text-sail-200">A</span>
+              - Artísticas
+            </li>
+            <li class="flex items-start sm:items-center gap-2">
+              <span class="font-bold text-sail-800 dark:text-sail-200">S</span>
+              - Medicina y Ciencias de la Salud
+            </li>
+          </ul>
+        </CardInfo>
+
+        <CardInfo title="Aptitudes">
+          <ul>
+            <li class="flex items-start sm:items-center gap-2">
+              <span class="font-bold text-sail-800 dark:text-sail-200">I</span>
+              - Ingeniería y Computación
+            </li>
+            <li class="flex items-start sm:items-center gap-2">
+              <span class="font-bold text-sail-800 dark:text-sail-200">D</span>
+              - Defensa y Seguridad
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="font-bold text-sail-800 dark:text-sail-200">E</span>
+              - Ciencias Exactas y Agrarias
+            </li>
+          </ul>
+        </CardInfo>
+      </div>
+    </SectionInfo>
+
+    <SectionInfo title="Origen y Desarrollo">
+      <p>
+        La prueba CHASIDE fue desarrollada por el psicólogo argentino Dr. John
+        Holland, especializado en orientación vocacional. Se basa en la teoría
+        de que las personas tienen diferentes intereses y aptitudes que las
+        hacen más adecuadas para determinadas áreas profesionales.
+      </p>
+      <p>
+        Esta prueba ha sido adaptada y validada en diferentes contextos
+        educativos de América Latina, y es ampliamente utilizada por su
+        sencillez de aplicación y la claridad de sus resultados. Esto la
+        convierte en una de las herramientas más confiables para la orientación
+        vocacional en América Latina.
+      </p>
+    </SectionInfo>
+
+    <SectionInfo title="¿Cómo funciona la prueba?">
+      <TabTest client:visible />
+    </SectionInfo>
+
+    <SectionInfo title="Validez y Confiabilidad">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <CardInfo
+          title="Validez"
+          text="La prueba CHASIDE ha sido validada en diversos estudios que confirman su capacidad para identificar intereses y aptitudes vocacionales. Su estructura se basa en teorías psicológicas sólidas sobre el desarrollo vocacional."
+        >
+          <CircleCheck
+            width={26}
+            height={26}
+            slot="icon"
+            class="text-sail-800 dark:text-sail-200"
+          />
+        </CardInfo>
+
+        <CardInfo
+          title="Confiabilidad"
+          text="Los estudios de confiabilidad muestran que la prueba ofrece resultados consistentes cuando se aplica en diferentes momentos. Sin embargo, como toda herramienta de orientación, debe considerarse como una guía y no como un determinante absoluto."
+        >
+          <CircleAlert
+            width={26}
+            height={26}
+            slot="icon"
+            class="text-sail-800 dark:text-sail-200"
+          />
+        </CardInfo>
+      </div>
+    </SectionInfo>
+
+    <SectionInfo title="Limitaciones y Consideraciones">
+      <div
+        class="flex gap-2 bg-woodsmoke-100/45 dark:bg-woodsmoke-900/25 p-3.5 md:p-6 lg:p-8 rounded-lg space-y-5"
+      >
+        <div>
+          <CircleQuestion
+            width={30}
+            height={30}
+            slot="icon"
+            class="text-sail-800 dark:text-sail-200"
+          />
+        </div>
+
+        <div class="space-y-2.5">
+          <p>Es importante tener en cuenta que:</p>
+
+          <ul class="space-y-1">
+            <ListItem>
+              La prueba CHASIDE es una herramienta de orientación, no un
+              instrumento de diagnóstico definitivo.
+            </ListItem>
+            <ListItem>
+              Los resultados deben complementarse con otras fuentes de
+              información, como entrevistas con orientadores, investigación
+              sobre carreras y experiencias prácticas.
+            </ListItem>
+            <ListItem>
+              Los intereses y aptitudes pueden cambiar con el tiempo y las
+              experiencias.
+            </ListItem>
+            <ListItem>
+              La decisión final sobre la elección de carrera debe considerar
+              múltiples factores, incluyendo oportunidades laborales, situación
+              económica y preferencias personales.
+            </ListItem>
+          </ul>
+        </div>
+      </div>
+    </SectionInfo>
+
+    <SectionInfo title="Beneficios de la Prueba CHASIDE">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <CardInfo
+          title="Autoconocimiento"
+          text="Te ayuda a identificar tus intereses y aptitudes, facilitando el proceso de autoconocimiento."
+        />
+
+        <CardInfo
+          title="Orientación clara"
+          text="Proporciona recomendaciones específicas sobre áreas profesionales que podrían ser adecuadas para ti."
+        />
+
+        <CardInfo
+          title="Decisión informada"
+          text="Te brinda información valiosa para tomar una decisión más acertada sobre tu futuro académico."
+        />
+      </div>
+    </SectionInfo>
+
+    <SectionInfo title="Adaptación Digital">
+      <p>
+        Este proyecto académico, desarrollado como parte de un proyecto escolar
+        sin fines de lucro, en el marco de una asignatura universitaria,
+        presenta una adaptación digital de la prueba CHASIDE con fines
+        educativos. La digitalización mantiene la estructura de la prueba
+        original, pero no es validada oficialmente por la UAGro.
+      </p>
+      <p>La versión digital permite:</p>
+      <ul>
+        <ListItem
+          >Acceder desde cualquier dispositivo con conexión a internet</ListItem
+        >
+        <ListItem>Obtener resultados inmediatos y personalizados</ListItem>
+        <ListItem
+          >Consultar información complementaria sobre áreas de estudio y
+          universidades</ListItem
+        >
+        <ListItem>Guardar y comparar resultados a lo largo del tiempo</ListItem>
+      </ul>
+    </SectionInfo>
+
+    <BannerSection
+      title="¿Listo para descubrir tu vocación?"
+      description="Con toda esta información sobre la prueba CHASIDE, ahora tienes las herramientas necesarias para tomar una decisión informada sobre tu futuro académico y profesional."
+    >
+      <div
+        class="flex flex-col sm:flex-row gap-4 items-center sm:justify-center"
+      >
+        <Button
+          type="link"
+          href="/iniciar-prueba"
+          text="Realizar la Prueba CHASIDE"
+        >
+          <Rocket
+            slot="icon"
+            width={20}
+            height={20}
+            class="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all hidden sm:block"
+          />
+        </Button>
+
+        <Button
+          type="link"
+          href="/areas"
+          text="Ver Áreas de Estudio"
+          button="outline"
+        />
+      </div>
+    </BannerSection>
+  </ContainerPage>
+</Layout>

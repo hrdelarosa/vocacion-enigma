@@ -1,0 +1,239 @@
+---
+import type { ResultsWithProgramsResponse } from '../../../types/api-response'
+import Image from 'astro/components/Image.astro'
+import LayoutPrint from '../../../layouts/LayoutPrint.astro'
+import SectionInfo from '../../../components/features/report/SectionInfo.astro'
+import FieldText from '../../../components/features/report/FieldText.astro'
+import AreaScores from '../../../components/features/report/AreaScores.astro'
+import { studyAreasOptions } from '../../../constants/study-areas-opcions'
+import { questionsChaside } from '../../../constants/questions-chaside'
+import Footer from '../../../components/features/report/Footer.astro'
+
+const { id } = Astro.params
+const res = await fetch(`http://localhost:4321/api/results/${id}?programs=true`)
+const data: ResultsWithProgramsResponse = await res.json()
+
+const totalScore = Object.values(data.results.scores).reduce(
+  (acc, score) => acc + score,
+  0
+)
+---
+
+<LayoutPrint>
+  <div
+    class="w-full max-w-4xl mx-auto bg-white dark:bg-black p-6 py-8 transition-bg"
+  >
+    <main id="content" class="space-y-6">
+      <section class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <Image
+            src="/enigma.webp"
+            alt="Logo de Vocación Enigma"
+            width={80}
+            height={80}
+          />
+
+          <div>
+            <h1 class="text-3xl font-bold">Vocacional Enigma</h1>
+            <p class="text-sm font-semibold text-sail-700">Prueba CHASIDE</p>
+          </div>
+        </div>
+
+        <div class="text-right">
+          <h2 class="text-2xl font-bold">Reporte completo</h2>
+          <p
+            class="text-sm font-medium text-woodsmoke-500 dark:text-woodsmoke-300"
+          >
+            Generado por Vocación Enigma
+          </p>
+          <p
+            class="text-sm font-medium text-woodsmoke-500 dark:text-woodsmoke-300"
+          >
+            Sistema de Orientación Vocacional
+          </p>
+        </div>
+      </section>
+
+      <SectionInfo title="Información de la Prueba">
+        <div class="grid grid-cols-2 gap-2">
+          <FieldText label="Nombre del evaluado" field="Desconocido" />
+          <FieldText label="ID de la prueba" field={data.results.test_id} />
+          <FieldText
+            label="Fecha de realización"
+            field={new Date(data.results.created_at).toLocaleDateString()}
+          />
+          <FieldText
+            label="Tiempo empleado"
+            field={new Date().toLocaleTimeString()}
+          />
+        </div>
+      </SectionInfo>
+
+      <SectionInfo title="Área Recomendada">
+        <div class="flex flex-col items-center gap-4">
+          <div
+            class="flex items-center justify-center gap-2 p-3.5 rounded-md bg-woodsmoke-100/45 dark:bg-woodsmoke-900/25 print:border print:border-woodsmoke-100/80"
+          >
+            <div
+              class="size-12 rounded-full grid place-items-center font-black print:text-black print:border print:border-woodsmoke-100/80 print:bg-white"
+              style={{
+                backgroundColor: studyAreasOptions.find(
+                  (area: any) => area.id === data.results.tops[0].id
+                )?.color[0],
+              }}
+            >
+              <span class="text-white font-black text-lg">
+                {data.results.tops[0].id}
+              </span>
+            </div>
+
+            <div class="text-left">
+              <h1 class="text-xl font-medium">
+                {data.results.tops[0].name}
+              </h1>
+
+              <p
+                class="text-sm font-medium text-woodsmoke-600 dark:text-woodsmoke-400"
+              >
+                {data.results.tops[0].score}/14 puntos
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="space-y-2 p-3.5 rounded-sm bg-woodsmoke-100/45 dark:bg-woodsmoke-900/25"
+          >
+            <h2 class="font-semibold">Descripción del área:</h2>
+            <p
+              class="text-sm text-woodsmoke-900 dark:text-woodsmoke-200 leading-relaxed"
+            >
+              {
+                studyAreasOptions.find(
+                  (area: any) => area.id === data.results.tops[0].id
+                )?.longDescription
+              }
+            </p>
+          </div>
+        </div>
+      </SectionInfo>
+
+      <SectionInfo title="Puntuaciones por Área CHASIDE">
+        <div class="space-y-2.5">
+          {
+            Object.entries(data.results.scores)
+              .sort(([, scoreA], [, scoreB]) => scoreB - scoreA)
+              .map(([letter, score], index) => (
+                <AreaScores
+                  letter={letter}
+                  area={
+                    studyAreasOptions.find((area: any) => area.id === letter)
+                      ?.title || ''
+                  }
+                  principal={index === 0}
+                  score={score}
+                  totalScore={totalScore}
+                />
+              ))
+          }
+        </div>
+      </SectionInfo>
+
+      <SectionInfo title="Carreras Recomendadas">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {
+            data.programs.map((program) => (
+              <div class="bg-woodsmoke-50 dark:bg-woodsmoke-950 p-3 rounded-lg">
+                <div class="flex items-start justify-between">
+                  <p class="font-semibold mb-1">{program.program}</p>
+
+                  <div
+                    class="size-5 text-xs font-semibold grid place-items-center rounded-full text-white mt-1"
+                    style={{
+                      backgroundColor: studyAreasOptions.find(
+                        (area: any) => area.id === data.results.tops[0].id
+                      )?.color[0],
+                    }}
+                  >
+                    {
+                      studyAreasOptions.find(
+                        (area: any) => area.id === data.results.tops[0].id
+                      )?.id
+                    }
+                  </div>
+                </div>
+
+                <p class="text-sm text-woodsmoke-500 dark:text-woodsmoke-300">
+                  Semestres: {Number(program.duration.split(' ')[0]) * 2}
+                </p>
+                <p class="text-xs text-woodsmoke-500 dark:text-woodsmoke-300">
+                  Duración: {program.duration}
+                </p>
+              </div>
+            ))
+          }
+        </div>
+      </SectionInfo>
+
+      <SectionInfo title="Respuestas del cuestionario">
+        <div class="relative overflow-x-auto">
+          <table
+            class="table-auto w-full text-sm text-left divide-y divide-woodsmoke-200 dark:divide-woodsmoke-800"
+          >
+            <thead
+              class="text-woodsmoke-900 dark:text-woodsmoke-100 font-semibold"
+            >
+              <tr>
+                <th scope="col" class="px-6 py-3 text-center">No.</th>
+                <th scope="col" class="px-6 py-3">Pregunta</th>
+                <th scope="col" class="px-6 py-3 text-center">Respuesta</th>
+              </tr>
+            </thead>
+
+            <tbody class="text-woodsmoke-700 dark:text-woodsmoke-300">
+              {
+                Object.entries(data.results.responses).map(
+                  ([id, response], index) => (
+                    <tr class="odd:bg-white dark:odd:bg-black even:bg-woodsmoke-50 dark:even:bg-woodsmoke-950">
+                      <td scope="row" class="px-6 py-2.5 text-center">
+                        {id}
+                      </td>
+                      <td class="px-6 py-2.5">
+                        {questionsChaside[index].questions}
+                      </td>
+                      <td class="px-6 py-2.5 text-center">{response}</td>
+                    </tr>
+                  )
+                )
+              }
+            </tbody>
+          </table>
+        </div>
+      </SectionInfo>
+
+      <section
+        class="bg-woodsmoke-100/45 dark:bg-woodsmoke-900/25 rounded-lg p-5 flex flex-col items-center"
+      >
+        <h3 class="text-2xl font-semibold mb-3">Importante</h3>
+
+        <ul class="space-y-1 text-sm">
+          <li>
+            • Este resultado es una orientación basada en tus respuestas
+            actuales
+          </li>
+          <li>
+            • Se recomienda complementar con asesoría vocacional personalizada
+          </li>
+          <li>
+            • Considera explorar las carreras sugeridas mediante visitas a
+            facultades
+          </li>
+          <li>
+            • Mantén una mente abierta hacia otras áreas que puedan interesarte
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <Footer />
+  </div>
+</LayoutPrint>
