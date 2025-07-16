@@ -1,48 +1,53 @@
-# Astro Starter Kit: Basics
+# Vocación Enigma
 
-```sh
-pnpm create astro@latest -- --template basics
+Plataforma web de orientación vocacional oficial de la Universidad Autónoma de Guerrero (UAGro). Permite a estudiantes descubrir el área de estudio que mejor se adapta a sus intereses y habilidades mediante la prueba CHASIDE, sin necesidad de registro y con resultados inmediatos.
+
+## ✨ Características principales
+
+- Prueba CHASIDE automatizada para orientación vocacional.x
+- Resultados personalizados y confidenciales.
+- Enfoque en la oferta educativa de la UAGro.
+- Interfaz moderna, responsiva y accesible.
+- Sin necesidad de crear cuenta para realizar la prueba.
+
+## 🚀 Estructura del Proyecto
+
 ```
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
 /
-├── public/
-│   └── favicon.svg
+├── public/        # Recursos estáticos e imágenes
 ├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── components/ # Componentes reutilizables de la UI
+│   ├── layouts/    # Plantillas generales
+│   ├── pages/      # Rutas y páginas principales
+│   └── constants/  # Constantes y configuraciones
+├── package.json    # Dependencias y scripts
+└── README.md
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## 🧞 Comandos útiles
 
-## 🧞 Commands
+Todos los comandos se ejecutan desde la raíz del proyecto:
 
-All commands are run from the root of the project, from a terminal:
+| Comando                | Acción                                              |
+| ---------------------- | --------------------------------------------------- |
+| `pnpm install`         | Instala las dependencias                            |
+| `pnpm dev`             | Inicia el servidor de desarrollo (`localhost:4321`) |
+| `pnpm build`           | Genera la versión de producción en `./dist/`        |
+| `pnpm preview`         | Previsualiza la build localmente                    |
+| `pnpm astro ...`       | Ejecuta comandos de Astro (add, check, etc.)        |
+| `pnpm astro -- --help` | Ayuda de la CLI de Astro                            |
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+## 🛠️ Tecnologías principales
 
-## 👀 Want to learn more?
+- [Astro](https://astro.build/) (framework principal)
+- [Preact](https://preactjs.com/) (componentes interactivos)
+- [Tailwind CSS](https://tailwindcss.com/) (estilos)
+- [Supabase](https://supabase.com/) (backend y autenticación opcional)
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## 📄 Licencia
+
+MIT. Creado con ♥️ por [hrdelarosa](https://github.com/hrdelarosa) para la Universidad Autónoma de Guerrero.
+
+---
+
+¿Tienes sugerencias o encontraste un bug? ¡Abre un issue o pull request en [el repositorio de GitHub](https://github.com/hrdelarosa/vocacion-enigma)!
