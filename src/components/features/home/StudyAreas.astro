@@ -1,0 +1,57 @@
+---
+import ContentSection from '../../common/ContentSection.astro'
+import Title from '../../common/Title.astro'
+import CardArea from '../../cards/CardArea.astro'
+import Button from '../../UI/buttons/Button.astro'
+import ArrowRight from '../../../assets/icons/arrowRight.svg'
+import { studyAreasOptions } from '../../../constants/study-areas-opcions'
+---
+
+<ContentSection>
+  <div class="flex flex-col items-center justify-center gap-8">
+    <div class="flex flex-col items-center gap-3 max-w-6xl mx-auto">
+      <Title title="Áreas de Estudio" />
+
+      <p
+        class="text-base md:text-lg text-center text-balance text-woodsmoke-800 dark:text-woodsmoke-200"
+      >
+        Conocer en detalle cada área del Test CHASIDE te permitirá comprender
+        mejor tus resultados y cómo estos se relacionan con las oportunidades de
+        estudio en la Universidad Autónoma de Guerrero (UAGro).
+      </p>
+    </div>
+
+    <div class="flex flex-col items-center gap-5">
+      <div
+        class="grid sm:grid-cols-2 lg:grid-cols-3 items-center justify-center gap-5"
+      >
+        {
+          studyAreasOptions.map((area) => (
+            <CardArea title={area.title} description={area.description}>
+              <area.icon
+                width={22}
+                height={22}
+                class="group-hover:text-sail-900 dark:group-hover:text-sail-400 transition-colors"
+                slot="icon"
+              />
+            </CardArea>
+          ))
+        }
+      </div>
+
+      <Button
+        type="link"
+        href="/areas"
+        text="Ver todas las áreas"
+        button="primary"
+      >
+        <ArrowRight
+          slot="icon"
+          width={20}
+          height={20}
+          class="group-hover:translate-x-1 transition-transform hidden sm:block"
+        />
+      </Button>
+    </div>
+  </div>
+</ContentSection>

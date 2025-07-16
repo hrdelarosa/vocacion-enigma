@@ -1,0 +1,72 @@
+---
+import SecondarySection from '../../sections/SecondarySection.astro'
+import Title from '../../common/Title.astro'
+import CardChaside from '../../cards/CardChaside.astro'
+import Lightbulb from '../../../assets/icons/lightbulb.svg'
+import BookMarked from '../../../assets/icons/bookMarked.svg'
+import Graduation from '../../../assets/icons/graduation.svg'
+import Students from '../../../assets/icons/study-areas/humanistic.svg'
+---
+
+<SecondarySection>
+  <div class="flex flex-col items-center gap-3 max-w-6xl mx-auto text-center">
+    <Title title="¿Por qué realizar la prueba?" />
+    <p
+      class="text-base md:text-lg text-center text-balance text-woodsmoke-800 dark:text-woodsmoke-200"
+    >
+      La prueba CHASIDE es una herramienta confiable que te ayudará a
+      identificar tus intereses y aptitudes para tomar una decisión informada
+      sobre tu futuro académico.
+    </p>
+  </div>
+
+  <div class="grid md:grid-cols-2 items-center justify-center gap-5">
+    <CardChaside
+      title="Autoconocimiento"
+      description="Descubre tus intereses, habilidades y aptitudes para tomar decisiones más acertadas sobre tu futuro profesional."
+    >
+      <Lightbulb
+        slot="icon"
+        width={18}
+        height={18}
+        class="md:size-5 text-sail-900 group-hover:text-sail-700 dark:text-sail-300 dark:group-hover:text-sail-400 transition-colors"
+      />
+    </CardChaside>
+
+    <CardChaside
+      title="Metodología probada"
+      description="La prueba CHASIDE ha sido validada científicamente y es utilizada por profesionales de la orientación vocacional."
+    >
+      <BookMarked
+        slot="icon"
+        width={18}
+        height={18}
+        class="md:size-5 text-sail-900 group-hover:text-sail-700 dark:text-sail-300 dark:group-hover:text-sail-400 transition-colors"
+      />
+    </CardChaside>
+
+    <CardChaside
+      title="Orientación académica"
+      description="Recibe recomendaciones específicas sobre las carreras universitarias que mejor se adaptan a tu perfil."
+    >
+      <Graduation
+        slot="icon"
+        width={18}
+        height={18}
+        class="md:size-5 text-sail-900 group-hover:text-sail-700 dark:text-sail-300 dark:group-hover:text-sail-400 transition-colors"
+      />
+    </CardChaside>
+
+    <CardChaside
+      title="Respaldo institucional"
+      description="Proyecto desarrollado por la Universidad Autónoma de Guerrero para apoyar a los estudiantes en su elección profesional."
+    >
+      <Students
+        slot="icon"
+        width={18}
+        height={18}
+        class="md:size-5 text-sail-900 group-hover:text-sail-700 dark:text-sail-300 dark:group-hover:text-sail-400 transition-colors"
+      />
+    </CardChaside>
+  </div>
+</SecondarySection>

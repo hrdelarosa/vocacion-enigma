@@ -1,0 +1,93 @@
+---
+import { Image } from 'astro:assets'
+import ContentSection from '../../common/ContentSection.astro'
+import Title from '../../common/Title.astro'
+import UniversityStat from '../../UI/UniversityStat.astro'
+import Button from '../../UI/buttons/Button.astro'
+import Link from '../../UI/navigation/Link.astro'
+import ArrowRight from '../../../assets/icons/arrowRight.svg'
+import LinkExternal from '../../../assets/icons/link-external.svg'
+---
+
+<ContentSection>
+  <article>
+    <header class="text-left space-y-1.5 mb-4">
+      <Title title="Universidad Autónoma de Guerrero" />
+
+      <p
+        class="text-base md:text-lg text-balance text-woodsmoke-800 dark:text-woodsmoke-200"
+      >
+        Más de 60 años formando profesionales comprometidos con el desarrollo de
+        Guerrero y México. Una institución pública de educación superior
+        comprometida con la excelencia académica, la investigación pertinente y
+        el desarrollo social de la región.
+      </p>
+    </header>
+
+    <div class="flex flex-col md:flex-row items-center gap-8 md:gap-16">
+      <div
+        class="grid sm:grid-cols-2 grid-rows-2 gap-4 md:gap-8 order-last md:order-first"
+      >
+        <UniversityStat
+          value="60+"
+          title="Trayectoria Sólida"
+          description="Con más de 60 años de historia, forjando el futuro de miles de jóvenes."
+        />
+
+        <UniversityStat
+          value="35,000+"
+          title="Gran Comunidad Universitaria"
+          description="Alberga a más de 35,000 estudiantes en sus diversos programas (dato aprox. 2022)."
+        />
+
+        <UniversityStat
+          value="50+"
+          title="Amplia Oferta Educativa"
+          description="Más de 50 programas de licenciatura y opciones de posgrado en 6 grandes áreas del conocimiento."
+        />
+
+        <UniversityStat
+          value="280+"
+          title="Impulso a la Investigación"
+          description="Cuenta con más de 280 académicos en el Sistema Nacional de Investigadores (SNI) (cifra 2023)."
+        />
+      </div>
+
+      <Image
+        src="/uagro-shield.webp"
+        alt="Escudo de la Universidad Autónoma de Guerrero(UAGro)"
+        class="order-first md:order-last md:w-60 md:h-60 lg:w-80 lg:h-80"
+        transition:name="shield-uagro"
+        width={190}
+        height={190}
+      />
+    </div>
+
+    <div
+      class="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8 mt-3.5"
+    >
+      <Button
+        type="link"
+        href="/uagro"
+        text="Ver más sobre la UAGro"
+        button="outline"
+      >
+        <ArrowRight
+          slot="icon"
+          width={20}
+          height={20}
+          class="group-hover:translate-x-0.5 transition-transform hidden md:block"
+        />
+      </Button>
+
+      <Link href="https://uagro.mx" text="Más información sobre la UAGro">
+        <LinkExternal
+          slot="icon"
+          width={20}
+          height={20}
+          class="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform hidden md:block"
+        />
+      </Link>
+    </div>
+  </article>
+</ContentSection>
