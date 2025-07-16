@@ -1,0 +1,13 @@
+---
+interface Props {
+  label: string
+  field: string | number | undefined
+}
+
+const { label, field } = Astro.props
+---
+
+<div>
+  <p class="text-sm text-woodsmoke-600 dark:text-woodsmoke-400">{label}</p>
+  <p class="font-semibold">{field === undefined ? 'N/A' : field}</p>
+</div>

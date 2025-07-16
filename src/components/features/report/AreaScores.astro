@@ -1,0 +1,47 @@
+---
+interface Props {
+  letter: string
+  area: string
+  principal?: boolean
+  score: number
+  totalScore: number
+}
+
+const { letter, area, principal = false, score, totalScore } = Astro.props
+---
+
+<div class="flex items-center justify-between">
+  <div class="flex items-center gap-2">
+    <div
+      class={`text-sm font-semibold text-white dark:text-black ${
+        principal ? 'bg-sail-800 dark:bg-sail-400' : 'bg-black dark:bg-white'
+      } grid place-items-center size-8 rounded-full`}
+    >
+      {letter}
+    </div>
+
+    <div class="flex items-center gap-1.5">
+      <span class="text-lg font-medium">{area}</span>
+      <span
+        class="text-sm font-medium text-woodsmoke-500 dark:text-woodsmoke-300"
+        >{score}/14 puntos</span
+      >
+    </div>
+  </div>
+
+  <div class="flex items-center gap-2">
+    <div class="w-44 h-2 bg-woodsmoke-200 dark:bg-woodsmoke-600 rounded-full">
+      <div
+        class={`h-full ${principal ? 'bg-sail-800 dark:bg-sail-400' : 'bg-black dark:bg-white'} rounded-full`}
+        style={{
+          width: `${Math.round((score / totalScore) * 100)}%`,
+        }}
+      >
+      </div>
+    </div>
+
+    <span class="text-sm font-semibold w-9 text-right">
+      {Math.round((score / totalScore) * 100)}%
+    </span>
+  </div>
+</div>
