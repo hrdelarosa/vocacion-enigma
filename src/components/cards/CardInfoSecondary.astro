@@ -1,0 +1,28 @@
+---
+interface Props {
+  title?: string
+  text?: string
+}
+
+const { title, text } = Astro.props
+---
+
+<div class="flex flex-col items-center justify-between gap-1.5">
+  <slot name="icon" />
+  <div class="flex flex-col items-center justify-center">
+    <h3
+      class="text-lg sm:text-xl text-primary-dark dark:text-primary-light font-semibold"
+    >
+      {title}
+    </h3>
+    {
+      text ? (
+        <span class="text-sm text-woodsmoke-400 dark:text-woodsmoke-300 text-center">
+          {text}
+        </span>
+      ) : (
+        <slot name="text" />
+      )
+    }
+  </div>
+</div>

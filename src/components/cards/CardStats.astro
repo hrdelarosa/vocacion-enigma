@@ -1,0 +1,24 @@
+---
+interface Props {
+  stat: string
+  text?: string
+}
+
+const { stat, text } = Astro.props
+---
+
+<div
+  class="flex flex-col items-center justify-between gap-2 p-5 rounded-lg border-2 border-woodsmoke-300/55 hover:border-woodsmoke-300/95 dark:border-woodsmoke-600/55 dark:hover:border-woodsmoke-600/95 transition-colors"
+>
+  <slot name="icon" />
+  <div class="flex flex-col items-center justify-center">
+    <h3
+      class="text-2xl sm:text-3xl text-primary-dark dark:text-primary-light font-bold"
+    >
+      {stat}
+    </h3>
+    <span class="text-sm text-woodsmoke-400 dark:text-woodsmoke-300 text-center"
+      >{text}</span
+    >
+  </div>
+</div>

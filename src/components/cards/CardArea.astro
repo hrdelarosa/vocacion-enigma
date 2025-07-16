@@ -1,0 +1,32 @@
+---
+interface Props {
+  title: string
+  description: string
+}
+
+const { title, description } = Astro.props
+---
+
+<article
+  class="h-full flex flex-col gap-3 p-6 rounded-lg bg-woodsmoke-100/55 hover:bg-woodsmoke-100/65 dark:bg-woodsmoke-900/25 dark:hover:bg-woodsmoke-900/35 transition-colors group"
+>
+  <div class="flex items-center gap-4">
+    <div
+      class="size-8 grid place-items-center rounded-md bg-woodsmoke-200/50 dark:bg-woodsmoke-900 text-sail-800 dark:text-sail-200 group-hover:translate-x-0.5 group-hover:scale-105 transition-all"
+    >
+      <slot name="icon" />
+    </div>
+
+    <h3
+      class="text-xl font-medium text-sail-800 group-hover:text-sail-900 dark:text-sail-200 dark:group-hover:text-sail-400 transition-colors"
+    >
+      {title}
+    </h3>
+  </div>
+
+  <p
+    class="text-balance text-woodsmoke-600 group-hover:text-woodsmoke-950 dark:text-woodsmoke-300 dark:group-hover:text-sail-100 transition-colors"
+  >
+    {description}
+  </p>
+</article>
