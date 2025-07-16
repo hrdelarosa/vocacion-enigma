@@ -1,0 +1,65 @@
+---
+import type { ResultsWithProgramsResponse } from '../../../../types/api-response'
+import { studyAreasOptions } from '../../../../constants/study-areas-opcions'
+import ListItem from '../../../UI/ListItem.astro'
+
+const cookie = Astro.cookies.get('test_id')?.value || ''
+
+const res = await fetch(
+  `http://localhost:4321/api/results/${cookie}?programs=true`
+)
+const data: ResultsWithProgramsResponse = await res.json()
+---
+
+<div
+  class="flex flex-col md:flex-row items-start md:items-center justify-between gap-2 animate-fade-in"
+>
+  <div>
+    <h3 class="text-xl font-semibold">{data.results.tops[0].name}</h3>
+    <p class="text-balance">
+      {
+        studyAreasOptions.find(
+          (area: any) => area.id === data.results.tops[0].id
+        )?.description
+      }
+    </p>
+  </div>
+
+  <div class="flex flex-col items-start md:items-end w-full max-w-28">
+    <span
+      class="inline-block text-base font-medium text-woodsmoke-500 dark:text-woodsmoke-300"
+    >
+      {data.results.tops[0].score} puntos
+    </span>
+
+    <span
+      class="inline-block text-sm font-medium text-woodsmoke-500 dark:text-woodsmoke-300"
+    >
+      {Math.round((data.results.tops[0].score / 14) * 100)}% de afinidad
+    </span>
+
+    <div
+      class="w-full h-2 bg-woodsmoke-200 dark:bg-woodsmoke-600 rounded-full mt-2"
+    >
+      <div
+        class="h-full bg-sail-800 dark:bg-sail-400 rounded-full"
+        style={{
+          width: `${Math.round((data.results.tops[0].score / 14) * 100)}%`,
+        }}
+      >
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="animate-fade-in">
+  <h4 class="font-medium">Carreras recomendadas</h4>
+
+  <ul class="grid grid-cols-1 md:grid-cols-2 space-y-0.5 mt-1.5">
+    {
+      data.programs.map((program: any) => (
+        <ListItem>{program.program}</ListItem>
+      ))
+    }
+  </ul>
+</div>

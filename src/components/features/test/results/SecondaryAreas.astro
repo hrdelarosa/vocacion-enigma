@@ -1,0 +1,36 @@
+---
+interface Props {
+  area: string
+  description: string
+  points: number
+}
+
+const { area, description, points } = Astro.props
+---
+
+<div
+  class="h-full flex flex-col gap-4 rounded-lg p-6 border border-woodsmoke-300/55 dark:border-woodsmoke-600/55 shadow-sm animate-fade-in"
+>
+  <div>
+    <h3 class="text-xl font-semibold">{area}</h3>
+    <p class="text-sm text-woodsmoke-500 dark:text-woodsmoke-300">
+      {description}
+    </p>
+  </div>
+
+  <div class="flex items-center gap-1.5">
+    <span class="text-sm font-medium text-sail-800 dark:text-sail-400 mr-1">
+      {points}/14 puntos
+    </span>
+    <div class="w-28 h-2 bg-woodsmoke-200 dark:bg-woodsmoke-600 rounded-full">
+      <div
+        class="h-full bg-sail-800 dark:bg-sail-400 rounded-full"
+        style={{ width: `${(points / 14) * 100}%` }}
+      >
+      </div>
+    </div>
+    <span class="text-xs text-sail-800 dark:text-sail-400">
+      {Math.round((points / 14) * 100)}%
+    </span>
+  </div>
+</div>

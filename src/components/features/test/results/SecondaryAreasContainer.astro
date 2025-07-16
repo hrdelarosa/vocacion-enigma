@@ -1,0 +1,27 @@
+---
+import type { ResultsResponse } from '../../../../types/api-response'
+import { studyAreasOptions } from '../../../../constants/study-areas-opcions'
+import SecondaryArea from '../results/SecondaryAreas.astro'
+
+const cookie = Astro.cookies.get('test_id')?.value || ''
+
+const res = await fetch(`http://localhost:4321/api/results/${cookie}`)
+const data: ResultsResponse = await res.json()
+---
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+  {
+    data.results.tops.map((area: any, index: number) =>
+      index === 0 ? null : (
+        <SecondaryArea
+          area={area.name}
+          description={
+            studyAreasOptions.find((area: any) => area.id === area.id)
+              ?.description || ''
+          }
+          points={area.score}
+        />
+      )
+    )
+  }
+</div>
