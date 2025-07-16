@@ -12,12 +12,12 @@ Plataforma web de orientación vocacional. Permite a estudiantes descubrir el á
 <summary>Tabla de contenidos</summary>
 
 - [Vocación Enigma](#vocación-enigma)
-  - [Características principales](#características-principales)
-    - [Capturas de pantalla de Vocación Enigma](#capturas-de-pantalla-de-vocación-enigma)
-  - [Por qué Vocación Enigma?](#por-qué-vocación-enigma)
-  - [Por qué la vinculación con la UAGro?](#por-qué-la-vinculación-con-la-uagro)
-  - [Estructura del Proyecto](#estructura-del-proyecto)
-  - [Tecnologías principales](#tecnologías-principales)
+- [Características principales](#características-principales)
+  - [Capturas de pantalla de Vocación Enigma](#capturas-de-pantalla-de-vocación-enigma)
+- [Por qué Vocación Enigma?](#por-qué-vocación-enigma)
+- [Por qué la vinculación con la UAGro?](#por-qué-la-vinculación-con-la-uagro)
+- [Estructura del Proyecto](#estructura-del-proyecto)
+- [Tecnologías principales](#tecnologías-principales)
 
 </details>
 
