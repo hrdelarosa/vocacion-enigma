@@ -1,15 +1,6 @@
 ---
-import { ClientRouter } from 'astro:transitions'
-import Header from '../components/layout/Header.astro'
-import Footer from '../components/layout/Footer.astro'
-import './src/styles/global.css'
-
-interface Props {
-  title: string
-  description?: string
-}
-
-const { title, description } = Astro.props
+import '../styles/global.css'
+import Header from '../components/features/report/Header.astro'
 ---
 
 <!doctype html>
@@ -19,6 +10,8 @@ const { title, description } = Astro.props
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+    <title>Informe detallado</title>
+    <meta name="description" content="Informe detallado – Vocación Enigma" />
     <script is:inline>
       ;(function () {
         const theme = (() => {
@@ -68,27 +61,11 @@ const { title, description } = Astro.props
           }
         })
     </script>
-    <title>{title}</title>
-    <ClientRouter />
-    {description && <meta name="description" content={description} />}
   </head>
   <body
     class="bg-primary-light text-primary-dark dark:bg-primary-dark dark:text-primary-light font-display transition-bg"
   >
     <Header />
-    <main class="py-12 sm:py-14">
-      <slot />
-    </main>
-    <Footer />
+    <slot />
   </body>
 </html>
-
-<script>
-  if (
-    document.cookie
-      .split('; ')
-      .find((row) => row.startsWith('test_id='))
-      ?.split('=')[1]
-  )
-    window.localStorage.removeItem('test_id')
-</script>
