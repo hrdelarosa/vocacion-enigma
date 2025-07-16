@@ -1,0 +1,63 @@
+---
+import { Image } from 'astro:assets'
+import Button from '../UI/buttons/Button.astro'
+import Rocket from '../../assets/icons/rocket.svg'
+---
+
+<div
+  class="w-full max-w-7xl mx-auto py-8 px-4 sm:px-10 2xl:px-0 md:py-16 lg:py-20"
+>
+  <div
+    class="relative flex flex-col sm:flex-row md:items-center justify-between md:gap-5 lg:gap-0 bg-woodsmoke-100/55 dark:bg-woodsmoke-900/25 rounded-lg py-8 sm:py-12 md:py-20 px-8 sm:px-12 md:px-16"
+  >
+    <div
+      class="flex flex-col items-start justify-center max-w-3xl order-2 sm:order-1"
+    >
+      <p
+        class="block antialiased text-sm lg:text-base leading-relaxed text-sail-950 dark:text-sail-50 font-normal opacity-55 mb-2.5"
+      >
+        Sin registro
+      </p>
+      <h2
+        class="block antialiased tracking-normal text-2xl lg:text-4xl text-sail-800 dark:text-sail-200 mb-5 font-semibold"
+      >
+        ¿Listo para descubrir tu camino profesional?
+      </h2>
+      <div>
+        <Image
+          src="/enigma2.webp"
+          alt="Vocación Enigma"
+          class="animate-fade-in-left float-right ml-3 hidden sm:block md:hidden"
+          width={180}
+          height={180}
+        />
+
+        <p
+          class="block antialiased font-sans text-base lg:text-lg text-sail-950 dark:text-sail-50 font-normal leading-relaxed mb-5 sm:mb-10"
+        >
+          Descubre el área de estudio que mejor se adapta a tus intereses y
+          habilidades con nuestra prueba de orientación vocacional. Una
+          iniciativa de la Universidad Autónoma de Guerrero para apoyarte en la
+          elección de tu futuro profesional.
+        </p>
+      </div>
+
+      <Button type="link" href="/iniciar-prueba" text="Comenzar Prueba">
+        <Rocket
+          slot="icon"
+          width={20}
+          height={20}
+          class="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all hidden md:block"
+        />
+      </Button>
+    </div>
+
+    <Image
+      src="/enigma2.webp"
+      alt="Vocación Enigma"
+      class="animate-fade-in-left sm:hidden md:block lg:h-[280px] order-1 sm:order-2 mb-3 lg:w-auto mx-auto sm:mx-0"
+      width={230}
+      height={230}
+    />
+  </div>
+</div>
