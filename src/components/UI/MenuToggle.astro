@@ -1,0 +1,90 @@
+---
+import Menu from '../../assets/menu.svg'
+import X from '../../assets/equis.svg'
+---
+
+<input
+  id="menu-toggle"
+  type="checkbox"
+  class="peer hidden"
+  aria-label="Abrir menú"
+/>
+<label
+  class="cursor-pointer relative flex items-center lg:hidden pl-5 text-sail-700 dark:text-sail-400 border-l-2 border-woodsmoke-300/50 dark:border-woodsmoke-800/95 transition-colors"
+  aria-label="Abrir menú"
+  for="menu-toggle"
+>
+  <Menu id="show-button" class="size-7 transition-all duration-300 bounce" />
+  <X
+    id="hide-button"
+    class="size-7 transition-all duration-300 bounce opacity-0 absolute translate-x-7"
+  />
+</label>
+
+<style>
+  .bounce {
+    transform: scale(1);
+    transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  #hide-button.active {
+    opacity: 1;
+    transform: translateX(-1.75rem) scale(1);
+  }
+
+  #hide-button:not(.active) {
+    opacity: 0;
+    transform: translateX(-1.75rem) scale(0.5);
+  }
+
+  #show-button.hidden-icon {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+</style>
+
+<script is:inline>
+  document.addEventListener('astro:page-load', () => {
+    const menuToggle = document.getElementById('menu-toggle')
+    const navLinks = document.querySelector('nav ul')
+    const showButton = document.getElementById('show-button')
+    const hideButton = document.getElementById('hide-button')
+
+    function updateMenuState(isOpen) {
+      if (!navLinks || !showButton || !hideButton) return
+
+      if (isOpen) {
+        navLinks.classList.remove('hidden')
+        showButton?.classList.add('hidden-icon')
+        hideButton?.classList.add('active')
+      } else {
+        navLinks.classList.add('hidden')
+        showButton?.classList.remove('hidden-icon')
+        hideButton?.classList.remove('active')
+      }
+
+      if (menuToggle) {
+        menuToggle.checked = isOpen
+      }
+    }
+
+    if (menuToggle && navLinks && showButton && hideButton) {
+      menuToggle.addEventListener('change', () => {
+        updateMenuState(menuToggle.checked)
+      })
+      const menuLinks = navLinks.querySelectorAll('a')
+      menuLinks.forEach((link) => {
+        link.addEventListener('click', () => {
+          updateMenuState(false)
+        })
+      })
+
+      document.addEventListener('click', (e) => {
+        const target = e.target
+        if (!target.closest('nav') && !menuToggle.checked) {
+          updateMenuState(false)
+        }
+      })
+    }
+  })
+</script>

@@ -1,0 +1,71 @@
+---
+import Moon from '../../assets/moon.svg'
+import Sun from '../../assets/sun.svg'
+---
+
+<div>
+  <label
+    for="theme-switch"
+    class="grid place-items-center cursor-pointer leading-none rounded-full shadow-xl bg-primary-dark text-primary-light dark:bg-primary-light dark:text-primary-dark size-6 lg:size-[30px]"
+  >
+    <input type="checkbox" class="hidden" id="theme-switch" />
+    <div class="icon icon--moon">
+      <Moon />
+    </div>
+
+    <div class="icon icon--sun">
+      <Sun />
+    </div>
+  </label>
+</div>
+
+<style>
+  .icon {
+    grid-column: 1 / 1;
+    grid-row: 1 / 1;
+    transition: transform 400ms;
+    line-height: 0.1;
+  }
+
+  .icon--sun {
+    transition-delay: 100ms;
+  }
+
+  .icon--moon {
+    transform: scale(0);
+  }
+
+  #theme-switch:checked ~ .icon--sun {
+    transform: rotate(360deg) scale(0);
+  }
+
+  #theme-switch:checked ~ .icon--moon {
+    transition-delay: 100ms;
+    transform: scale(1) rotate(360deg);
+  }
+</style>
+
+<script>
+  const initializeTheme = () => {
+    const themeSwitch = document.getElementById(
+      'theme-switch'
+    ) as HTMLInputElement
+    if (!themeSwitch) return
+
+    const isDark = document.documentElement.classList.contains('dark')
+    themeSwitch.checked = isDark
+
+    themeSwitch.addEventListener('change', () => {
+      if (themeSwitch.checked) {
+        document.documentElement.classList.add('dark')
+        localStorage.setItem('theme', 'dark')
+      } else {
+        document.documentElement.classList.remove('dark')
+        localStorage.setItem('theme', 'light')
+      }
+    })
+  }
+
+  document.addEventListener('DOMContentLoaded', initializeTheme)
+  document.addEventListener('astro:after-swap', initializeTheme)
+</script>

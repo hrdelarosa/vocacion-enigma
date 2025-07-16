@@ -1,0 +1,28 @@
+---
+interface Props {
+  text: string;
+  bgColor?: string;
+  textColor?: string;
+  className?: string;
+}
+
+const { 
+  text, 
+  bgColor = 'bg-blue-500', 
+  textColor = 'text-white',
+  className = '' 
+} = Astro.props;
+
+const baseStyles = 'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium';
+---
+
+<span 
+  class:list={[
+    baseStyles,
+    bgColor,
+    textColor,
+    className
+  ]}
+>
+  {text}
+</span>

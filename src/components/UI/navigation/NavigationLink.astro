@@ -1,0 +1,25 @@
+---
+interface Props {
+  text: string
+  href?: string
+}
+
+const { text, href = '#' } = Astro.props
+const { pathname } = Astro.url
+const isActive =
+  pathname === href || (href !== '/' && pathname.startsWith(href))
+---
+
+<li
+  class:list={[
+    'text-center lg:text-left font-semibold rounded-lg transition-colors',
+    {
+      'text-sail-900 dark:text-sail-200 bg-sail-100/70 hover:bg-sail-200/60 dark:bg-woodsmoke-900/45 dark:hover:bg-woodsmoke-900/60':
+        isActive,
+      'hover:text-sail-900 hover:bg-sail-100/70 dark:hover:bg-woodsmoke-900/45 dark:hover:text-sail-200':
+        !isActive,
+    },
+  ]}
+>
+  <a class="block text-sm py-1.5 px-2 lg:py-2 lg:px-3" href={href}>{text}</a>
+</li>

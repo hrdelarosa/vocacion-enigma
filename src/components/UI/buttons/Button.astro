@@ -1,0 +1,69 @@
+---
+import type { Type, Button, Size } from '../../../types/buttons.d.ts'
+
+export interface Props {
+  type?: Type
+  text?: string
+  href?: string
+  button?: Button
+  size?: Size
+  id?: string
+  action?: 'print' | 'none'
+}
+
+const {
+  text = null,
+  type = 'button',
+  href = '#',
+  button = 'primary',
+  size = 'large',
+  id,
+  action = 'none',
+} = Astro.props
+---
+
+{
+  type === 'link' ? (
+    <a
+      id={id}
+      href={href}
+      class={`flex items-center justify-center gap-2 font-semibold rounded-lg cursor-pointer transition-all group hover:shadow-lg dark:hover:shadow-black/90
+    ${size === 'small' ? 'px-3 py-2 text-sm' : 'px-4 py-2.5 text-sm sm:text-base'}
+    ${
+      button === 'primary'
+        ? 'text-primary-light dark:text-primary-dark bg-sail-700 dark:bg-sail-300 hover:bg-sail-800 dark:hover:bg-sail-400'
+        : button === 'secondary'
+          ? 'text-primary-dark dark:text-primary-light bg-woodsmoke-100 dark:bg-woodsmoke-800 hover:bg-woodsmoke-100/70 dark:hover:bg-woodsmoke-900 hover:shadow-none'
+          : button === 'outline'
+            ? 'outline-1 outline-sail-700 text-sail-700 hover:bg-sail-700 hover:text-primary-light dark:outline-sail-300 dark:text-sail-300 dark:hover:bg-sail-300 dark:hover:text-primary-dark duration-300 ease-in-out'
+            : button === 'outline-secondary' &&
+              'outline-1 outline-woodsmoke-100 text-primary-dark hover:bg-woodsmoke-100/50 hover:shadow-none duration-300 ease-in-out'
+    }
+  `}
+    >
+      {text ? text : <slot name="text" />}
+      <slot name="icon" />
+    </a>
+  ) : (
+    <button
+      id={id}
+      onclick={action === 'print' ? 'window.print()' : undefined}
+      class={`flex items-center justify-center gap-2 font-semibold rounded-lg cursor-pointer transition-all group hover:shadow-lg dark:hover:shadow-black/90 select-none
+    ${size === 'small' ? 'px-3 py-2 text-sm' : 'px-4 py-2.5 text-sm sm:text-base'}
+    ${
+      button === 'primary'
+        ? 'text-primary-light dark:text-primary-dark bg-sail-700 dark:bg-sail-300 hover:bg-sail-800 dark:hover:bg-sail-400'
+        : button === 'secondary'
+          ? 'text-primary-dark dark:text-primary-light bg-woodsmoke-200 dark:bg-woodsmoke-800 hover:bg-woodsmoke-100 dark:hover:bg-woodsmoke-900 hover:shadow-none'
+          : button === 'outline'
+            ? 'outline-1 outline-sail-700 text-sail-700 hover:bg-sail-700 hover:text-primary-light dark:outline-sail-300 dark:text-sail-300 dark:hover:bg-sail-300 dark:hover:text-primary-dark duration-300 ease-in-out'
+            : button === 'outline-secondary' &&
+              'outline-1 outline-woodsmoke-100 text-primary-dark hover:bg-woodsmoke-100/50 hover:shadow-none duration-300 ease-in-out'
+    }
+  `}
+    >
+      {text ? text : <slot name="text" />}
+      <slot name="icon" />
+    </button>
+  )
+}

@@ -1,0 +1,27 @@
+---
+interface Props {
+  value: string
+  title: string
+  description: string
+}
+
+const { value, title, description } = Astro.props
+---
+
+<div class="relative flex flex-col text-woodsmoke-300">
+  <h3
+    class="block text-xl lg:text-3xl font-semibold text-sail-800 dark:text-sail-300 tracking-normal antialiased mb-3"
+  >
+    {value}
+  </h3>
+  <h5
+    class="block text-base lg:text-lg font-semibold text-sail-800 dark:text-sail-300 tracking-normal antialiased"
+  >
+    {title}
+  </h5>
+  <p
+    class="block text-xs lg:text-base text-woodsmoke-800 dark:text-woodsmoke-200"
+  >
+    {description}
+  </p>
+</div>

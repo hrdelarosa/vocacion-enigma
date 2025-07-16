@@ -1,0 +1,20 @@
+---
+import type { Target } from '../../../types/constants-types'
+
+interface Props {
+  href: string
+  text: string
+  target?: Target
+}
+
+const { href, text, target = '_blank' } = Astro.props
+---
+
+<a
+  class="flex items-center gap-2 text-sm font-bold sm:text-base text-primary-dark dark:text-primary-light hover:text-sail-800 dark:hover:text-sail-200 transition-colors group"
+  target={target}
+  href={href}
+>
+  {text}
+  <slot name="icon" />
+</a>

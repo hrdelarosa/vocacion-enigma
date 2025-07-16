@@ -1,0 +1,26 @@
+---
+interface Props {
+  type?: 'primary' | 'secondary'
+  hidden?: boolean
+}
+
+const { type = 'primary', hidden = false } = Astro.props
+const cookie = Astro.cookies.get('test_id')?.value || ''
+---
+
+<a
+  href={cookie ? '/prueba/resultados' : '/iniciar-prueba'}
+  class={`flex items-center justify-center gap-2 font-semibold rounded-lg cursor-pointer transition-all group hover:shadow-lg dark:hover:shadow-black/90 px-3 py-2 text-sm text-primary-light dark:text-primary-dark bg-sail-700 dark:bg-sail-300 hover:bg-sail-800 dark:hover:bg-sail-400 ${hidden && 'hidden'}`}
+>
+  <span class="text-sm"
+    >{
+      cookie
+        ? type === 'primary'
+          ? 'Resultados'
+          : 'Ver Resultados'
+        : type === 'primary'
+          ? 'Comenzar'
+          : 'Comenzar Prueba'
+    }</span
+  >
+</a>

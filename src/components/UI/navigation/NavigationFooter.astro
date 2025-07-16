@@ -1,0 +1,22 @@
+---
+import type { Target } from '../../../types/constants-types'
+
+interface Props {
+  text: string
+  href?: string
+  target?: Target
+}
+
+const { text, href = '', target = '_blank' } = Astro.props
+---
+
+<li>
+  <a
+    href={href}
+    target={target}
+    rel="noreferrer"
+    class="block pb-2 text-sm font-normal leading-relaxed text-woodsmoke-600 hover:text-woodsmoke-950 dark:text-woodsmoke-300 dark:hover:text-woodsmoke-100 transition-colors"
+  >
+    {text}
+  </a>
+</li>
