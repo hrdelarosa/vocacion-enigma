@@ -1,0 +1,67 @@
+---
+import { Image } from 'astro:assets'
+import Button from '../UI/buttons/Button.astro'
+import Rocket from '../../assets/icons/rocket.svg'
+import ArrowRight from '../../assets/icons/arrowRight.svg'
+---
+
+<section
+  class="grid place-items-center pt-6 pb-16 md:pt-10 md:pb-28 px-4 sm:px-10"
+>
+  <div
+    class="w-full max-w-7xl mx-auto grid lg:grid-cols-2 gap-5 lg:gap-8 items-center"
+  >
+    <div
+      class="flex flex-col items-center text-center lg:text-left lg:items-start gap-3 md:gap-5 lg:gap-8 order-last lg:order-first"
+    >
+      <div class="flex flex-col lg:items-start gap-3 sm:gap-4">
+        <h1
+          class="text-4xl md:text-5xl lg:text-6xl text-sail-900/75 dark:text-sail-200/80 font-bold"
+        >
+          Descubre tu Vocación Profesional
+        </h1>
+        <p class="text-lg md:text-xl text-balance">
+          ¿No estás seguro de qué estudiar? Responde unas sencillas preguntas y
+          obtén una recomendación personalizada sobre las áreas de estudio que
+          mejor se adaptan a ti, con un enfoque en la oferta educativa de la
+          UAGro.
+        </p>
+      </div>
+      <div class="flex items-center gap-3">
+        <Button type="link" href="/iniciar-prueba" text="Realizar Prueba">
+          <Rocket
+            slot="icon"
+            width={20}
+            height={20}
+            class="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all hidden sm:block"
+          />
+        </Button>
+
+        <Button
+          type="link"
+          href="/acerca-de-la-prueba"
+          text="Conoce más"
+          button="secondary"
+        >
+          <ArrowRight
+            slot="icon"
+            width={20}
+            height={20}
+            class="group-hover:translate-x-1 transition-transform hidden sm:block"
+          />
+        </Button>
+      </div>
+    </div>
+
+    <div class="flex items-center justify-center order-first lg:order-last">
+      <Image
+        src="/enigma.webp"
+        alt="Logo de Vocación Enigma"
+        class="lg:h-[440px] lg:w-auto"
+        width={280}
+        height={280}
+        transition:name="icon-enigma"
+      />
+    </div>
+  </div>
+</section>
