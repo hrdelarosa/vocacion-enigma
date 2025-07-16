@@ -14,7 +14,7 @@ export const prerender = true
     title="Prueba de Orientación CHASIDE"
     description="Responde las siguientes preguntas con sinceridad y al final obtendrás los resultados de la prueba"
   >
-    <ContainerQuestions client:load>
+    <ContainerQuestions client:only="preact">
       <div class="flex items-center justify-center h-[calc(100vh-380px)]">
         <div class="loader"></div>
       </div>
