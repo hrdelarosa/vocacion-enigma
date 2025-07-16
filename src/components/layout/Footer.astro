@@ -1,0 +1,99 @@
+---
+import { Image } from 'astro:assets'
+import GitHub from '../../assets/github.svg'
+import FieldFooter from '../UI/navigation/FieldFooter.astro'
+import NavigationFooter from '../UI/navigation/NavigationFooter.astro'
+import { footerOptions } from '../../constants/footer-options'
+---
+
+<footer
+  class="relative w-full px-4 pt-12 pb-6 sm:px-10 dark:bg-woodsmoke-900/25 bg-secondary-light"
+>
+  <div class="container w-full max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+      <div>
+        <div class="flex items-center gap-2.5 mb-4 group">
+          <Image
+            src="/enigma.webp"
+            alt="Vocación Enigma Logo"
+            width={38}
+            height={38}
+          />
+          <h4
+            class="block antialiased tracking-normal text-base sm:text-2xl font-semibold leading-snug text-sail-700 group-hover:text-sail-800 dark:text-sail-300 dark:group-hover:text-sail-400 transition-colors"
+          >
+            Vocación Enigma
+          </h4>
+        </div>
+        <p
+          class="block antialiased text-balance text-woodsmoke-600 dark:text-woodsmoke-300 text-md mb-2 font-normal"
+        >
+          Plataforma oficial de orientación vocacional enfocada a la Universidad
+          Autónoma de Guerrero.
+        </p>
+
+        <div class="pt-3.5 flex items-center gap-3">
+          <a
+            href="https://github.com/hrdelarosa"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <GitHub
+              class="size-8 hover:scale-105 hover:-translate-0.5 transition-all"
+            />
+          </a>
+        </div>
+      </div>
+
+      <div
+        class="items-top justify-end mb-6 grid gap-3 lg:gap-0 grid-cols-2 lg:grid-cols-3"
+      >
+        <FieldFooter option={footerOptions.links.option}>
+          {
+            footerOptions.links.links.map((option) => (
+              <NavigationFooter
+                text={option.name}
+                href={option.url}
+                target={option.target}
+              />
+            ))
+          }
+        </FieldFooter>
+
+        <FieldFooter option={footerOptions.university.option}>
+          {
+            footerOptions.university.links.map((option) => (
+              <NavigationFooter
+                text={option.name}
+                href={option.url}
+                target={option.target}
+              />
+            ))
+          }
+        </FieldFooter>
+
+        <FieldFooter option={footerOptions.technologies.option}>
+          {
+            footerOptions.technologies.links.map((option) => (
+              <NavigationFooter
+                text={option.name}
+                href={option.url}
+                target={option.target}
+              />
+            ))
+          }
+        </FieldFooter>
+      </div>
+    </div>
+
+    <hr
+      class="border-woodsmoke-300/50 dark:border-woodsmoke-900/95 my-6 transition-colors"
+    />
+
+    <div
+      class="text-md mt-2 py-1 font-normal text-center text-woodsmoke-600 dark:text-woodsmoke-300"
+    >
+      Copyright © 2025 Vocación Enigma de hrdelarosa. Creado con ♥️.
+    </div>
+  </div>
+</footer>
