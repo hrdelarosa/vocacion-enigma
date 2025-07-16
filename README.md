@@ -64,16 +64,22 @@ La vinculación con la UAGro de debe a que es la institución a la cual que acud
 
 ## Tecnologías principales
 
-- [![Astro][Astro-badge]][Astro-url]
-- [![Preact][React-badge]][React-url]
-- [![Tailwind CSS][Tailwind-badge]][Tailwind-url]
-- [![Supabase][Supabase-badge]][Supabase-url]
+- [![Astro][Astro-badge]][Astro-url] - Framework para construir sitios web/landing pages.
+- [![TypeScript][TypeScript-badge]][TypeScript-url] - JavaScript con sintaxis para los tipos.
+- [![Preact][React-badge]][React-url] - Framework para construir interfaces de usuario
+- [![Tailwind CSS][Tailwind-badge]][Tailwind-url] - Un framework CSS que prioriza las utilidades para crear rápidamente diseños personalizados.
+- [![Supabase][Supabase-badge]][Supabase-url] - Plataforma de base de datos y autenticación.
+- [![@midudev/tailwind-animations][animations-badge]][animations-url] - Animaciones sencillas para tu proyecto Tailwind.
 
 [Astro-url]: https://astro.build/
 [Astro-badge]: https://img.shields.io/badge/Astro-BC52EE?logo=astro&logoColor=fff
+[TypeScript-url]: https://www.typescriptlang.org/
+[TypeScript-badge]: https://shields.io/badge/TypeScript-3178C6?logo=TypeScript&logoColor=FFF
 [React-url]: https://preactjs.com/
 [React-badge]: https://img.shields.io/badge/-React-45b8d8?style=flat-square&logo=react&logoColor=white
 [Tailwind-url]: https://tailwindcss.com/
 [Tailwind-badge]: https://img.shields.io/badge/-Tailwind%20CSS-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white
 [Supabase-url]: https://supabase.com/
 [Supabase-badge]: https://shields.io/badge/supabase-black?logo=supabase&style=for-the-badge%22
+[animations-url]: https://tailwindcss-animations.vercel.app/
+[animations-badge]: https://img.shields.io/badge/@midudev/tailwind-animations-ff69b4?style=for-the-badge&logo=node.js&logoColor=white&color=blue
